@@ -15,6 +15,7 @@
     prompt_char
   )
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    context
     vpn_ip
     command_execution_time
     background_jobs

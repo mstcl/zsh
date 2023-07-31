@@ -58,8 +58,6 @@ export FZF_COMPLETION_OPTS="
     --preview-window hidden"
 # }}}
 # Tab completion {{{
-# zstyle ':fzf-tab:*' fzf-command sk
-# zstyle :fzf-tab:* fzf-flags "$SKIM_DEFAULT_OPTIONS"
 # Switch group {{{
 zstyle ':fzf-tab:*' switch-group 'alt-h' 'alt-l'
 # }}}

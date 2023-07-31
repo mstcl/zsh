@@ -26,13 +26,12 @@ alias rmv='trash-put'
 alias q='exit'
 # }}}
 # System tools {{{
-alias s="sudo grc fdisk -l"
-alias d='lsblk'
+alias fdisk="sudo grc fdisk -l"
 alias zt='time zsh -i -c exit'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-alias vpn='sudo protonvpn'
+alias ts='tailscale status'
 alias ka='killall -q'
 alias b='bat -pp'
 alias sc='sudo systemctl'
@@ -49,14 +48,7 @@ alias fv='nvm $(fzf --height 40% \
     --preview="bat --line-range :500 {}")'
 # }}}
 # Media and productivity {{{
-alias fs="feh --conversion-timeout 4"
-alias f='feh -Z -. -X -g 1280x720'
-alias tile='feh --bg-tile ~/.config/wpg/.current'
 alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weather'
-alias nb='newsboat -q'
-alias v='vdirsyncer sync default_calendar'
-alias k='ikhal'
-alias td='todo.sh -d ~/.config/todo/todo.cfg -c'
 # }}}
 # XDG standards non-conformists {{{
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
@@ -71,19 +63,27 @@ alias ll='exa -l --color=always --group-directories-first -h --git'
 alias lla='exa -l --color=always --group-directories-first -h --git -a'
 # }}}
 # Git {{{
+alias g='git'
 alias gs='git status'
+alias gss='git status -s'
 alias gr='git remote -v'
 alias gd='git diff'
 alias gi='git init'
 alias gp='git push'
 alias ga='git add'
+alias gall='git add .'
 alias gf='git fetch'
 alias gra='git remote add origin'
 alias gl='git log'
 alias gaa='git add --all'
 alias gpl='git pull'
-alias gpu='git push -u origin main'
+alias gpr='git pull --rebase'
+alias gpu='git push -u origin master'
 alias gc='git clone'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcount='git shortlog -sn'
+alias gcp='git cherry-pick'
 # }}}
 # Paru and pacman {{{
 alias u='paru -Syu --removemake'

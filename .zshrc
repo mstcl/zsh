@@ -23,26 +23,18 @@ ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
 ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=false
 # }}}
 
-# ANTIGEN {{{
-source /usr/share/zsh/share/antigen.zsh
-antigen bundles <<EOBUNDLES
-    trystan2k/zsh-tab-title
-    romkatv/zsh-defer
-    Tarrasch/zsh-bd
-    # MenkeTechnologies/zsh-expand
-    QuarticCat/zsh-smartcache
-EOBUNDLES
-antigen apply
-# }}}
-
 # SAUCE {{{
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source ~/.config/zsh/p10k.zsh
-zsh-defer source /usr/share/doc/pkgfile/command-not-found.zsh
-zsh-defer source "$HOME"/.config/zsh/functions.zsh
-zsh-defer source "$HOME"/.config/zsh/aliases.zsh
-zsh-defer source "$HOME"/.config/zsh/fzf.zsh
-zsh-defer source "$HOME"/.config/zsh/completion.zsh
+source "$XDG_CONFIG_HOME"/zsh/p10k.zsh
+source "$XDG_DATA_HOME"/antigen/bundles/romkatv/zsh-defer/zsh-defer.plugin.zsh
+zsh-defer source "$XDG_DATA_HOME"/antigen/bundles/trystan2k/zsh-tab-title/zsh-tab-title.plugin.zsh
+zsh-defer source "$XDG_DATA_HOME"/antigen/bundles/Tarrasch/zsh-bd/bd.plugin.zsh
+zsh-defer source "$XDG_DATA_HOME"/antigen/bundles/QuarticCat/zsh-smartcache/zsh-smartcache.plugin.zsh
+zsh-defer source "$XDG_DATA_HOME"/usr/share/doc/pkgfile/command-not-found.zsh
+zsh-defer source "$XDG_CONFIG_HOME"/zsh/functions.zsh
+zsh-defer source "$XDG_CONFIG_HOME"/zsh/aliases.zsh
+zsh-defer source "$XDG_CONFIG_HOME"/zsh/fzf.zsh
+zsh-defer source "$XDG_CONFIG_HOME"/zsh/completion.zsh
 zsh-defer source /etc/grc.zsh
 zsh-defer source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 zsh-defer source /usr/share/fzf/key-bindings.zsh
@@ -75,7 +67,7 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
 # }}}
 
 # SHELL VARIABLES {{{
-export ZPWR_EXPAND_BLACKLIST=(l lla ll la lt lta z)
+# export ZPWR_EXPAND_BLACKLIST=(l lla ll la lt lta z)
 export SUDO_PROMPT="⭤ Password: "
 export PROMPT_EOL_MARK=""
 export EXA_COLORS="da=1;31"
@@ -84,6 +76,6 @@ export LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 # ZOXIDE {{{
 autoload -Uz compinit && compinit -i
-compdef __zoxide_z_complete j
 eval "$(zoxide init zsh)"
 # }}}
+

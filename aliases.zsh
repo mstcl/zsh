@@ -63,6 +63,7 @@ alias ll='exa -l --color=always --group-directories-first -h --git'
 alias lla='exa -l --color=always --group-directories-first -h --git -a'
 # }}}
 # Git {{{
+alias lz='lazygit'
 alias g='git'
 alias gs='git status'
 alias gss='git status -s'

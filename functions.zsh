@@ -69,7 +69,7 @@ function ins {
 # }}}
 # Paru fuzzy remove {{{
 function rem() {
-    paru -Qq | fzf -q "$1" --height=80% --prompt="✘ " --preview-window=hidden --preview 'paru -Qi {1}' | xargs -ro paru -Rns
+    paru -Qq | fzf -q "$1" --height=80% --prompt="✗ " --preview-window=hidden --preview 'paru -Qi {1}' | xargs -ro paru -Rns
 }
 # }}}
 # Tldr fuzzy {{{
@@ -91,7 +91,7 @@ bindkey '^R^R' fzf-history-widget-accept
 # Ripgrep in file {{{
 fif() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    rg --files-with-matches --no-messages "$1" | fzf --preview-window=nohidden --prompt="❯❯ RIPGREP " --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+    rg --files-with-matches --no-messages "$1" | fzf --preview-window=nohidden --prompt="➤ RIPGREP " --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 # }}}
 # Neovim {{{
@@ -99,7 +99,7 @@ function nvm() {
     prc=$(ps -ef | grep glrnvim | wc -l)
     if [[ "$prc" -le 1 ]] then
         if [[ "$#" -eq 0 ]]; then
-            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket glrnvim -c "Alpha"
+            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket glrnvim
             return
         else
             i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket glrnvim $(pwd)/$@
@@ -110,4 +110,14 @@ function nvm() {
         return
     fi
 }
+# }}}
+# Keybinds {{{
+run-again() {
+    # get previous history item
+    zle up-history
+    # confirm command
+    zle accept-line
+}
+zle -N run-again
+bindkey "^K" run-again
 # }}}

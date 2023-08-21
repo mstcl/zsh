@@ -26,6 +26,7 @@ alias rmv='trash-put'
 alias q='exit'
 # }}}
 # System tools {{{
+alias 1f="onefetch --no-art --no-color-palette --disabled-fields churn authors --true-color never"
 alias fdisk="sudo grc fdisk -l"
 alias zt='time zsh -i -c exit'
 alias chown='chown --preserve-root'
@@ -44,13 +45,13 @@ alias fv='nvm $(fzf --height 40% \
     --preview-window=nohidden \
     --height=70% \
     --margin=5%,7% --layout=reverse \
-    --marker="++" --prompt=" " \
+    --marker="++" \
     --preview="bat --line-range :500 {}")'
 # }}}
 # Media and productivity {{{
 alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weather'
 # }}}
-# XDG standards non-conformists {{{
+# XDG standards for non-conformists {{{
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 # }}}

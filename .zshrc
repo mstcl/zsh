@@ -24,6 +24,8 @@ ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=false
 # }}}
 
 # SAUCE {{{
+autoload -Uz select-word-style
+select-word-style bash
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source "$XDG_CONFIG_HOME"/zsh/p10k.zsh
 source "$XDG_DATA_HOME"/antigen/bundles/romkatv/zsh-defer/zsh-defer.plugin.zsh

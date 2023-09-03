@@ -96,13 +96,13 @@ fif() {
 # }}}
 # Neovim {{{
 function nvm() {
-    prc=$(ps -ef | grep glrnvim | wc -l)
+    prc=$(ps -ef | grep nvim | wc -l)
     if [[ "$prc" -le 1 ]] then
         if [[ "$#" -eq 0 ]]; then
-            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket glrnvim
+            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim
             return
         else
-            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket glrnvim $(pwd)/$@
+            i3-msg workspace "11:A" > /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim $(pwd)/$@
             return
         fi
     else

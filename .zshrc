@@ -17,12 +17,6 @@ setopt nonomatch
 setopt numericglobsort
 # }}}
 
-# SHELL TITLE {{{
-ZSH_TAB_TITLE_ONLY_FOLDER=true
-ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
-ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=false
-# }}}
-
 # SAUCE {{{
 autoload -Uz select-word-style
 select-word-style bash
@@ -52,11 +46,12 @@ HISTSIZE=500000
 SAVEHIST=500000
 HIST_STAMPS="mm/dd/yyyy"
 setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
+# setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
+# setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 # }}}
 
 # AUTOSUGGESTION {{{
@@ -81,6 +76,38 @@ export LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 # }}}
 
 # ZOXIDE {{{
+export _ZO_FZF_OPTS="
+    --color fg:#574b42,bg:8,hl:1,fg+:7,bg+:#bdb1a8,hl+:9,gutter:8,scrollbar:#574b42,label:1
+    --color border:8,info:#574b42,prompt:1,spinner:2,pointer:1,marker:4,separator:8,header:1
+    --color preview-bg:#ded8d3,preview-border:#ded8d3,preview-scrollbar:8,preview-label:1
+    --height 80%
+    --border=top
+    --border-label='Quick jump to directory'
+    --info=inline-right
+    --scrollbar='▓'
+    --preview-window border-sharp
+    --preview-label='PREVIEW'
+    --pointer=' ⇒'
+    --marker='✓ '
+    --prompt=' ➤ '
+    --tabstop=4
+    --layout=reverse
+    --margin=1,5
+    --padding=0,0
+    --multi
+    --bind '?:toggle-preview'
+    --bind 'ctrl-space:toggle'
+    --bind 'ctrl-j:toggle-out'
+    --bind 'ctrl-k:toggle-in'
+    --bind 'enter:accept'
+    --bind 'alt-i:accept'
+    --bind 'alt-a:toggle-all'
+    --bind 'tab:down'
+    --bind 'shift-tab:up'
+    --preview='erd --color force --hidden -L 1 --no-progress --suppress-size --no-git --no-ignore -x -f -y inverted {2..} | head -200' --preview-window border-sharp"
 autoload -Uz compinit && compinit -i
 eval "$(zoxide init zsh)"
 # }}}
+
+# Hishtory Config:
+export PATH="$PATH:/home/lckdscl/.hishtory"

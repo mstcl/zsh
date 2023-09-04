@@ -41,12 +41,10 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settin
 # }}}
 # Neovim {{{
 alias big="/usr/bin/nvim -n -u NONE -i NONE -N"
-alias fv='nvm $(fzf --height 40% \
+alias fv='nvm $(fzf \
     --preview-window=nohidden \
-    --height=70% \
-    --margin=5%,7% --layout=reverse \
-    --marker="++" \
-    --preview="bat --line-range :500 {}")'
+    --border=top \
+    --border-label="Pick a file to open in neovim")'
 # }}}
 # Media and productivity {{{
 alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weather'
@@ -55,13 +53,14 @@ alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weath
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 # }}}
-# List with exa {{{
+# Listing {{{
 alias lt='exa --color=always -h --git --git-ignore --group-directories-first -T'
 alias lta='exa --color=always -h --group-directories-first --git --git-ignore -T -a'
 alias l='exa --color=always --group-directories-first -h --git --git-ignore'
 alias la='exa --color=always --group-directories-first -h --git -a'
 alias ll='exa -l --color=always --group-directories-first -h --git'
 alias lla='exa -l --color=always --group-directories-first -h --git -a'
+alias tree='erd --color force --hidden -L 3 --no-progress --suppress-size --no-git --no-ignore -x -f -y inverted'
 # }}}
 # Git {{{
 alias lz='lazygit'

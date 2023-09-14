@@ -94,7 +94,7 @@ function nvm() {
             NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim
             return
         else
-            /dev/null && NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim $(pwd)/$@
+            NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim $(pwd)/$@
             return
         fi
     else

@@ -1,19 +1,25 @@
-# :.config/zsh/.aliases
-# vim:set fdm=marker foldenable ft=zsh foldlevel=0:
+##########
+#  Sudo  #
+##########
 
-# Sudo {{{
 alias sudo="sudo "
 alias sunv='sudo -E nvim $1'
 alias sue='sudo -E $1'
-# }}}
-# Auto color {{{
+
+###########################
+#  Force colored outputs  #
+###########################
+
 alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 alias diff='diff --color=always'
 alias ip='ip --color=always'
-# }}}
-# Filesystem management {{{
+
+#####################
+#  File operations  #
+#####################
+
 alias md="mkdir -p"
 alias t='touch'
 alias et='rm -rv $TRASH/*'
@@ -23,37 +29,52 @@ alias cp='cp -iv'
 alias ln='ln -iv'
 alias rmf='rm -rfvi'
 alias rmv='trash-put'
-alias q='exit'
-# }}}
-# System tools {{{
-alias 1f="onefetch --no-art --no-color-palette --disabled-fields churn authors --true-color never"
-alias fdisk="sudo grc fdisk -l"
-alias zt='time zsh -i -c exit'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-alias ts='tailscale status'
-alias ka='killall -q'
-alias b='bat -pp'
+
+alias q='exit'
+
+
+#########
+#  Bat  #
+#########
+
+alias bi='bat -pp --color=always'
+alias b='bat'
+
+
+###############
+#  Systemctl  #
+###############
+
 alias sc='sudo systemctl'
 alias scu='systemctl --user'
-alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings '
-# }}}
-# Neovim {{{
+
+
+############
+#  Neovim  #
+############
+
+alias nvm="$HOME"/scripts/bin/nv-launch
 alias big="/usr/bin/nvim -n -u NONE -i NONE -N"
+
+
+#########
+#  Fzf  #
+#########
+
+alias rgf="$HOME"/scripts/bin/rg-fzf
 alias fv='nvm $(fzf \
     --preview-window=nohidden \
     --border=top \
     --border-label="Pick a file to open in neovim")'
-# }}}
-# Media and productivity {{{
-alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weather'
-# }}}
-# XDG standards for non-conformists {{{
-alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
-alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
-# }}}
-# Listing {{{
+
+
+#######################
+#  Directory listing  #
+#######################
+
 alias lt='eza --color=always -h --git --git-ignore --group-directories-first -T'
 alias lta='eza --color=always -h --group-directories-first --git --git-ignore -T -a'
 alias l='eza --color=always --group-directories-first -h --git --git-ignore'
@@ -61,8 +82,12 @@ alias la='eza --color=always --group-directories-first -h --git -a'
 alias ll='eza -l --color=always --group-directories-first -h --git'
 alias lla='eza -l --color=always --group-directories-first -h --git -a'
 alias tree='erd --color force --hidden -L 3 --no-progress --suppress-size --no-git --no-ignore -x -f -y inverted'
-# }}}
-# Git {{{
+
+
+#########
+#  Git  #
+#########
+
 alias lz='lazygit'
 alias g='git'
 alias gs='git status'
@@ -85,8 +110,12 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gcount='git shortlog -sn'
 alias gcp='git cherry-pick'
-# }}}
-# Paru and pacman {{{
+
+
+###################
+#  Pacman & paru  #
+###################
+
 alias u='paru -Syu --removemake'
 alias usu='paru -Syu --noconfirm --removemake'
 alias pstats='paru -Ps'
@@ -105,4 +134,18 @@ alias pcc='paru -Scd'
 alias pli="grep -i installed /var/log/pacman.log | cut -d ' ' -f1,4"
 alias plr="grep -i removed /var/log/pacman.log | cut -d ' ' -f1,4"
 alias plu="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"
-# }}}
+
+
+##############
+#  Assorted  #
+##############
+
+alias 1f="onefetch --no-art --no-color-palette --disabled-fields churn authors --true-color never"
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings '
+alias fdisk="sudo grc fdisk -l"
+alias zt='time zsh -i -c exit'
+alias ts='tailscale status'
+alias ka='killall -q'
+alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weather'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'

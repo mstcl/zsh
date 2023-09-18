@@ -80,6 +80,7 @@ export _ZO_FZF_OPTS="
     --color fg:#574b42,bg:8,hl:1,fg+:7,bg+:#bdb1a8,hl+:9,gutter:8,scrollbar:#574b42,label:1
     --color border:8,info:#574b42,prompt:1,spinner:2,pointer:1,marker:4,separator:8,header:1
     --color preview-bg:#ded8d3,preview-border:#ded8d3,preview-scrollbar:8,preview-label:1
+	--no-sort
     --height 80%
     --border=top
     --border-label='Quick jump to directory'

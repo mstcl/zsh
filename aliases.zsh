@@ -68,7 +68,7 @@ alias rgf="$HOME"/scripts/bin/rg-fzf
 alias fv='nvm $(fzf \
     --preview-window=nohidden \
     --border=top \
-    --border-label="Pick a file to open in neovim")'
+  --border-label="Pick a file to open in neovim")'
 
 
 #######################
@@ -88,7 +88,6 @@ alias tree='erd --color force --hidden -L 3 --no-progress --suppress-size --no-g
 #  Git  #
 #########
 
-alias lz='lazygit'
 alias g='git'
 alias gs='git status'
 alias gss='git status -s'

@@ -2,11 +2,6 @@
 #  Default keybinds  #
 ######################
 
-# Use bash select-word-style so Ctrl-W deletes
-# a directory at a time, not the whole directory
-autoload -Uz select-word-style
-select-word-style bash
-
 # Remove zsh native autocompletion popup
 bindkey -r ^D
 

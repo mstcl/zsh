@@ -13,7 +13,7 @@ PLUGINS_ROOT=/usr/share/zsh/plugins
 
 # This makes the prompt appear instantly
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -103,7 +103,7 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # Set this to whatever terminal one is using,
 # it seems to affect some GPU-based rendering
-export TERM=wezterm
+export TERM=alacritty
 
 # Nice sudo prompt
 export SUDO_PROMPT="➤ Password: "
@@ -166,6 +166,10 @@ zsh-defer source /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.zsh
 autoload -Uz compinit && compinit -i
 eval "$(zoxide init zsh)"
 
+# Use bash select-word-style so Ctrl-W deletes
+# a directory at a time, not the whole directory
+autoload -Uz select-word-style
+select-word-style bash
 
 #######################################
 #  Unset local environment variables  #

@@ -56,11 +56,11 @@
 
 ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=3
-  typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='★'
+  typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='SH'
 
   ################################[ prompt_char: prompt symbol ]################################
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=3
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=3
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='$'
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='➤'
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='V'
@@ -133,7 +133,7 @@
   typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=''
 
   #####################################[ vcs: git status ]######################################
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='∫ '
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=''
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
   function my_git_formatter() {
     emulate -L zsh
@@ -277,12 +277,12 @@
   typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
 
   ########################[ vpn_ip: virtual private network indicator ]#########################
-  typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=8
+  typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=4
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(proton|gpd|wg|(.*tun)|tailscale)[0-9]*'
   typeset -g POWERLEVEL9K_VPN_IP_SHOW_ALL=false
   # Custom icon.
-  typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION='☺'
+  typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION='VPN'
 
   ####################################[ time: current time ]####################################
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=6

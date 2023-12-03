@@ -31,7 +31,7 @@ gcm() {
 #########################
 
 function ins {
-  paru -Sl | \
+  paru -Sl | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' | \
     awk '{ print $2 " " $4 }' | \
     sed 's/installed/✓/' | \
     fzf --border=top \

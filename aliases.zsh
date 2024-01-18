@@ -115,7 +115,7 @@ alias gcp='git cherry-pick'
 #  Pacman & paru  #
 ###################
 
-alias u='paru -Syu --removemake'
+alias u='paru -Syu --removemake --sudoloop'
 alias usu='paru -Syu --noconfirm --removemake'
 alias pstats='paru -Ps'
 alias pcmt='paru -Gc'

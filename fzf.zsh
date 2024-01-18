@@ -6,15 +6,8 @@
 # fd default command
 FD_FLAGS='--strip-cwd-prefix --follow --no-ignore-vcs 2> /dev/null'
 
-# erd preview command
-ERD_PREVIEW="erd --color force --hidden -L 1 --no-progress --suppress-size --no-git \
-    --no-ignore -x -f -y inverted {2..} | head -200"
-
-# bat preview command
-BAT_PREVIEW="bat --style=numbers,header --color=always {}"
-
 # fzf height
-FZF_HEIGHT="80%"
+FZF_HEIGHT="100%"
 
 
 #####################
@@ -23,21 +16,21 @@ FZF_HEIGHT="80%"
 
 export FZF_DEFAULT_COMMAND="fd ${FD_FLAGS}"
 export FZF_DEFAULT_OPTS="
-    --color fg:#574b42,bg:8,hl:1,fg+:7,bg+:#bdb1a8,hl+:9
+    --color fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9
     --color gutter:8,scrollbar:#574b42,label:1
     --color border:8,info:#574b42,prompt:1,spinner:2
     --color pointer:1,marker:4,separator:8,header:1
     --color preview-bg:#ded8d3,preview-border:#ded8d3
     --color preview-scrollbar:8,preview-label:1
-    --height $FZF_HEIGHT
+    --height ~$FZF_HEIGHT
     --info=inline-right
     --scrollbar='▓'
     --preview-window hidden:border-sharp
-    --preview '$BAT_PREVIEW'
+    --preview 'less {}'
     --preview-label='PREVIEW'
     --pointer=' ⇒'
     --marker='✓ '
-    --prompt=' [A] ➤ '
+    --prompt=' ➤ '
     --tabstop=4
     --layout=reverse
     --margin=1,5
@@ -45,7 +38,7 @@ export FZF_DEFAULT_OPTS="
     --multi
     --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
     --bind 'ctrl-f:change-prompt( [F] ➤ )+reload(fd --type f ${FD_FLAGS})'
-    --bind 'ctrl-a:change-prompt( [A] ➤ )+reload(fd ${FD_FLAGS})'
+    --bind 'ctrl-a:change-prompt( ➤ )+reload(fd ${FD_FLAGS})'
     --bind '?:toggle-preview'
     --bind 'ctrl-space:toggle'
     --bind 'ctrl-j:toggle-out'
@@ -86,7 +79,26 @@ export FZF_CTRL_T_OPTS="
 #  Tab completion setup  #
 ##########################
 
-# group colors
+# Use external sources
+source ~/.config/zsh/fzf-tab-source/*.plugin.zsh
+
+# General
+zstyle ':fzf-tab:complete:*:*' fzf-preview \
+  'less ${(Q)realpath}'
+
+zstyle ':fzf-tab:complete:*:*' fzf-flags \
+    --color=fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9 \
+    --color=gutter:8,scrollbar:#574b42,label:1 \
+    --color=border:8,info:#574b42,prompt:1,spinner:2 \
+    --color=pointer:1,marker:4,separator:8,header:1 \
+    --color=preview-bg:#ded8d3,preview-border:#ded8d3 \
+    --color=preview-scrollbar:8,preview-label:1 \
+    --min-height="5" \
+    --height="~$FZF_HEIGHT" \
+    --info=inline-right \
+    --scrollbar='▓'
+
+# Group colors
 FZF_TAB_GROUP_COLORS=(
     $'\033[33m' $'\033[34m' $'\033[33m' $'\033[34m' $'\033[33m' $'\033[34m'
 )
@@ -104,10 +116,20 @@ zstyle ':completion:*:descriptions' format '[%d]'
 # Set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+# TLDR preview
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview \
+	'tldr --color always $word'
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-flags \
+    --border=top \
+    --border-label="TLDR" \
+    --height="90%" \
+    --preview-window=right,80%,nohidden
+
 # Preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-flags \
     --border=top \
     --border-label="Enter directory" \
+    --height="90%" \
     --preview-window=nohidden
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
@@ -118,6 +140,7 @@ zstyle ':fzf-tab:complete:ps:argument-rest' fzf-preview \
 zstyle ':fzf-tab:complete:ps:argument-rest' fzf-flags \
     --border=top \
     --border-label="Processes" \
+    --height="90%" \
     --preview-window=nohidden:up:3:wrap
 
 # Kill
@@ -126,43 +149,51 @@ zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview \
 zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags \
     --border=top \
     --border-label="Kill process" \
+    --height="90%" \
     --preview-window=nohidden:up:3:wrap
 
 # Systemctl
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview \
-    'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-flags \
     --border=top \
-    --border-label='Systemd services' \
+    --height="90%" \
+    --border-label='systemd services' \
     --preview-window=up:nohidden:wrap
 
 # Env vars
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
-    fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:user-expand::' \
+    fzf-preview 'less $word'
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Environment variables' \
+    --preview-window=up:nohidden:wrap
 
 # Git
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
-    'git diff $word | bat -p --color=always'
-zstyle ':fzf-tab:complete:git-*:*' fzf-flags --preview-window=nohidden
-zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
-    'git log --color=always $word'
-zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
-    'git help $word | bat -plman --color=always'
-zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
-    'case "$group" in
-    "commit tag") git show --color=always $word ;;
-    *) git show --color=always $word ;;
-esac'
-zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
-    'case "$group" in
-    "modified file") git diff $word ;;
-    "recent commit object name") git show --color=always $word ;;
-    *) git log --color=always $word ;;
-esac'
+zstyle ':fzf-tab:complete:git-*:*' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Git' \
+	--preview-window=wrap:nohidden
 
-# Man
-zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
-zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+# # Man
+
+zstyle ':fzf-tab:complete:(\\|)run-help' fzf-preview \
+  'run-help $word | bat -lman'
+
+zstyle ':fzf-tab:complete:(\\|)run-help:' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Git' \
+	--preview-window=wrap:nohidden
+
+zstyle ':fzf-tab:complete:(\\|*/|)man:' fzf-preview \
+  'man $word | bat -lman'
+
+zstyle ':fzf-tab:complete:(\\|*/|)man:' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Man' \
+	--preview-window=wrap:nohidden
 
 # Accept when enter (but not execute)
 zstyle ':fzf-tab:*' fzf-bindings 'enter:accept'
@@ -188,6 +219,4 @@ export _ZO_FZF_OPTS="${FZF_DEFAULT_OPTS}
 ##########################
 
 unset FD_FLAGS
-unset ERD_PREVIEW
-unset BAT_PREVIEW
 unset FZF_HEIGHT

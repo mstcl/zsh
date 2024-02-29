@@ -55,9 +55,9 @@ export FZF_DEFAULT_OPTS="
 ############
 
 export FZF_CTRL_R_OPTS="
-    --no-sort
     --info=hidden
     --border=top
+    --preview 'echo {}'
     --border-label='Command history'
     --preview-window hidden
     --bind 'enter:accept'"
@@ -80,7 +80,7 @@ export FZF_CTRL_T_OPTS="
 ##########################
 
 # Use external sources
-source ~/.config/zsh/fzf-tab-source/*.plugin.zsh
+source $XDG_DATA_HOME/zsh/fzf-tab-source/*.plugin.zsh
 
 # General
 zstyle ':fzf-tab:complete:*:*' fzf-preview \

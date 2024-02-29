@@ -56,7 +56,6 @@ alias scu='systemctl --user'
 #  Neovim  #
 ############
 
-alias nvm="$HOME"/scripts/bin/nv-launch
 alias big="/usr/bin/nvim -n -u NONE -i NONE -N"
 
 
@@ -65,11 +64,18 @@ alias big="/usr/bin/nvim -n -u NONE -i NONE -N"
 #########
 
 alias rgf="$HOME"/scripts/bin/rg-fzf
-alias fv='nvm $(fzf \
+alias fv='nvim $(fzf \
     --preview-window=nohidden \
     --border=top \
   --border-label="Pick a file to open in neovim")'
 
+
+#############
+#  Ansible  #
+#############
+
+alias ap="ansible-playbook"
+alias ac="ansible-playbook -C"
 
 #######################
 #  Directory listing  #

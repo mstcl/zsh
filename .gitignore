@@ -2,3 +2,6 @@
 .zconfdump*
 .zcompdump
 .zcompdump.void.779450
+.zprofile
+.zshenv
+.zshrc

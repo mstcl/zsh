@@ -1,0 +1,58 @@
+# :vim: set ft=yaml.ansible:
+---
+current_user: "{{ lookup('env', 'USER') }}"
+
+# ~~ (0) SYSTEM CONFIGURATION ~~
+
+system:
+  data_location: "$XDG_DATA_HOME/zsh" # where to place history and plugins
+  config_location: "$XDG_CONFIG_HOME/zsh" # where to place configs
+  terminal: "" # the terminal to use (to set $TERM)
+
+# ~~ (1) UTILITIES  ~~
+
+# Other utilities that can be integrated with zsh
+# Setting to true will install and configure them
+
+utilities:
+  fzf: true # fuzzy file sorter TUI
+  zoxide: true # quick cd based on frequency
+  grc: true # colorize output
+  eza: true # better ls
+
+# ~~ (2) PLUGINS  ~~
+
+plugins:
+  autosuggestions: true # autocomplete inline suggestions
+  window_title: true # auto change the window title to match proc
+  autopair: true # auto add matching parens
+  syntax_highlight: true # zsh syntax highlighting
+  command_not_found: true # display package suggestion if command not found
+  fzf_tab: true # tab complete with fzf
+  p10k: true # prompt for zsh
+  vi_mode: true # enable vi-mode
+
+# ~~ (3) ZSHENV ~~
+
+# The .zshenv file is sourced every zsh session.
+# Bare minimum variables go here.
+# For user applications, use .zprofile in section (4).
+# Some 'necessary' ones are included.
+# Expects a list.
+zshenv_variables:
+  - LANG: "en_GB.UTF-8"
+  - XDG_CONFIG_HOME: "$HOME/.config"
+  - XDG_CACHE_HOME: "$HOME/.cache"
+  - XDG_DATA_HOME: "$HOME/.local/share"
+  - XDG_STATE_HOME: "$HOME/.local/share"
+  - ZDOTDIR: "{{ system.config_location }}"
+
+# ~~ (4) ZPROFILE ~~
+
+# The .zprofile file is sourced for a login session.
+# We can set stuff like PATH here
+# Expects a list.
+zprofile_variables: []
+
+# Configure directories to append to PATH here
+path: []

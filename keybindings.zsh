@@ -86,13 +86,15 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
 fzf-history-widget() {
   local selected num
   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-  selected=( $(fc -rl 1 | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
+  selected=( $(fc -rnl 1 | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
     FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS-} -n2..,.. --scheme=history --bind=ctrl-r:toggle-sort,ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" "fzf") )
   local ret=$?
   if [ -n "$selected" ]; then
-    num=$selected[1]
-    if [ -n "$num" ]; then
+    num=$(awk '{print $1}' <<< "$selected")
+    if [[ "$num" =~ ^[1-9][0-9]*$ ]]; then
       zle vi-fetch-history -n $num
+    else
+      LBUFFER="$selected"
     fi
   fi
   zle reset-prompt

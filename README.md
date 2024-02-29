@@ -1,7 +1,44 @@
-# bimshell
+# zsh
 
 __lckdscl's opinionated zsh configuration__
 
-It's functional, speedy, and looks good. What else can you ask for?
 
 ![preview](preview.png)
+
+## Features
+
+Functional, speedy, and clean.
+
+## Get started
+
+### Cloning
+
+```sh
+$ git clone -b master https://github.com/mstcl/zsh
+$ cd zsh
+```
+
+### Configuration
+
+```sh
+$ git checkout -B prod
+```
+
+Read through what's available to configure in `host_vars/localhost.yml` and
+edit it.
+
+### Installing
+
+When you're happy:
+
+```sh
+$ ansible-playbook main.yml
+```
+
+## Updating
+
+```sh
+$ git checkout master; git pull origin master; git checkout prod; git merge master
+```
+
+Work through conflicts if needed.

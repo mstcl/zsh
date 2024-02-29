@@ -1,0 +1,7 @@
+{% if zshenv_variables is defined and zshenv_variables | length > 0 %}
+{% for item in zshenv_variables %}
+{% for key, value in item.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+{% endfor %}
+{% endif %}

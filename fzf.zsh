@@ -80,7 +80,7 @@ export FZF_CTRL_T_OPTS="
 ##########################
 
 # Use external sources
-source $XDG_DATA_HOME/zsh/fzf-tab-source/*.plugin.zsh
+source $XDG_DATA_HOME/zsh/plugins/fzf-tab-source/*.plugin.zsh
 
 # General
 zstyle ':fzf-tab:complete:*:*' fzf-preview \

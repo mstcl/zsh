@@ -120,19 +120,19 @@
         - ".zprofile"
         - ".zshrc"
 
-    - name: Make symbolic to ZDOTDIR
+    - name: Make symbolic link to ZDOTDIR
       ansible.builtin.file:
         src: "{{ playbook_dir }}"
         dest: "{{ system.config_location }}"
         state: link
 
-    - name: Make symbolic to .zshenv
+    - name: Make symbolic link to .zshenv
       ansible.builtin.file:
         src: "{{ playbook_dir }}/.zshenv"
         dest: "/home/{{ current_user }}/.zshenv"
         state: link
 
-    - name: Make symbolic to .lessfilter
+    - name: Make symbolic link to .lessfilter
       ansible.builtin.file:
         src: "{{ playbook_dir }}/files/.lessfilter"
         dest: "/home/{{ current_user }}/.lessfilter"

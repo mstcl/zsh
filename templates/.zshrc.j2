@@ -192,3 +192,8 @@ eval "$(zoxide init zsh)"
 # a directory at a time, not the whole directory
 autoload -Uz select-word-style
 select-word-style bash
+
+# Load direnv
+{% if utils.direnv %}
+eval "$(direnv hook zsh)"
+{% end %}

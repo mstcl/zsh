@@ -42,3 +42,12 @@ $ git checkout master; git pull origin master; git checkout prod; git merge mast
 ```
 
 Work through conflicts if needed.
+
+## Troubleshooting
+
+If you use `XDG_DATA_HOME` and `XDG_CONFIG_HOME`, but they're empty, you might
+have to set those environment variables the first time you run the playbook:
+
+```sh
+$ XDG_DATA_HOME=<> XDG_CONFIG_HOME=<> ansible-playbook main.yml
+```

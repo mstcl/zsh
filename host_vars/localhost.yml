@@ -19,6 +19,7 @@ utilities:
   zoxide: true # quick cd based on frequency
   grc: true # colorize output
   eza: true # better ls
+  direnv: true # env file configuration
 
 # ~~ (2) PLUGINS  ~~
 

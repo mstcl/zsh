@@ -7,7 +7,7 @@
 
   tasks:
     - name: Download core packages
-      packages: true
+      tags: packages
       become: true
       ansible.builtin.package:
         name:
@@ -15,7 +15,7 @@
         state: present
 
     - name: Download utilities
-      packages: true
+      tags: packages
       become: true
       block:
         - name: Download fzf

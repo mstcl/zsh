@@ -1,7 +1,7 @@
 .zshrc.*
+!.zshrc.j2
 .zconfdump*
-.zcompdump
-.zcompdump.void.779450
+.zcompdump*
 .zprofile
 .zshenv
 .zshrc

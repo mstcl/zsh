@@ -1,5 +1,3 @@
-# :.config/zsh/.p10k.zsh
-# for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 'builtin' 'local' '-a' 'p10k_config_opts'
 [[ ! -o 'aliases'         ]] || p10k_config_opts+=('aliases')
 [[ ! -o 'sh_glob'         ]] || p10k_config_opts+=('sh_glob')
@@ -10,6 +8,8 @@
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
   autoload -Uz is-at-least && is-at-least 5.1 || return
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    toolbox
+    virtualenv
     dir
     vcs
     prompt_char
@@ -52,14 +52,15 @@
     typeset -g POWERLEVEL9K_EMPTY_LINE_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='%{%}'
   fi
 
-  #################################[ os_icon: os identifier ]##################################
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=4
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=
+
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=
 
-###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=3
   typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='SH'
 
-  ################################[ prompt_char: prompt symbol ]################################
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='$'
@@ -70,8 +71,6 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
 
-  ###########[ vi_mode: vi mode (you don't need this if you've enabled prompt_char) ]###########
-  # Text and color for normal (a.k.a. command) vi mode.
   typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING=" CMD "
   typeset -g POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND=0
   typeset -g POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND=7
@@ -85,7 +84,6 @@
   typeset -g POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND=0
   typeset -g POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND=3
 
-  ##################################[ dir: current directory ]##################################
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=1
   typeset -g POWERLEVEL9K_DIR_BACKGROUND=
   typeset -g POWERLEVEL9K_DIR_PREFIX=''
@@ -133,7 +131,6 @@
   '*'            DEFAULT  '')
   typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=''
 
-  #####################################[ vcs: git status ]######################################
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=''
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
   function my_git_formatter() {
@@ -143,14 +140,12 @@
       return
     fi
     if (( $1 )); then
-      # Styling for up-to-date Git status.
-      local       meta='%15F'     # default foreground
+      local       meta='%15F'   # default foreground
       local      clean='%3F'    # green foreground
       local   modified='%4F'    # yellow foreground
       local  untracked='%5F'    # blue foreground
       local conflicted='%2F'    # red foreground
     else
-      # Styling for incomplete and stale Git status.
       local       meta='%244F'  # grey foreground
       local      clean='%244F'  # grey foreground
       local   modified='%244F'  # grey foreground
@@ -160,17 +155,17 @@
     local res
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
-      (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
+      (( $#branch > 32 )) && branch[13,-13]="…"
       res+="${meta}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
     if [[ -n $VCS_STATUS_TAG
-          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
+          && -z $VCS_STATUS_LOCAL_BRANCH
         ]]; then
       local tag=${(V)VCS_STATUS_TAG}
-      (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
+      (( $#tag > 32 )) && tag[13,-13]="…"
       res+="${meta}#${clean}${tag//\%/%%}"
     fi
-    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
+    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&
       res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
       res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
@@ -212,7 +207,6 @@
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=2
   typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=3
 
-  ##########################[ status: exit code of the last command ]###########################
   typeset -g POWERLEVEL9K_STATUS_EXTENDED_STATES=true
   typeset -g POWERLEVEL9K_STATUS_OK=false
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
@@ -231,19 +225,16 @@
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=1
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='!'
 
-  ###################[ command_execution_time: duration of the last command ]###################
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=8
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=''
 
-  #######################[ background_jobs: presence of background jobs ]#######################
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=8
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='♧'
 
-  ##################################[ disk_usage: disk usage ]##################################
   typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND=35
   typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND=220
   typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_FOREGROUND=160
@@ -251,23 +242,18 @@
   typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_LEVEL=95
   typeset -g POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=false
 
-  ######################################[ ram: free RAM ]#######################################
   typeset -g POWERLEVEL9K_RAM_FOREGROUND=66
 
-  #####################################[ swap: used swap ]######################################
   typeset -g POWERLEVEL9K_SWAP_FOREGROUND=96
 
-  ######################################[ load: CPU load ]######################################
   typeset -g POWERLEVEL9K_LOAD_WHICH=5
   typeset -g POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=66
   typeset -g POWERLEVEL9K_LOAD_WARNING_FOREGROUND=178
   typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=166
 
-  ##############[ taskwarrior: taskwarrior task count (https://taskwarrior.org/) ]##############
   typeset -g POWERLEVEL9K_TASKWARRIOR_FOREGROUND=8
   typeset -g POWERLEVEL9K_TASKWARRIOR_VISUAL_IDENTIFIER_EXPANSION='✓'
 
-  ##################################[ context: user@hostname ]##################################
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=7
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=7
@@ -277,15 +263,12 @@
   typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
   typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
 
-  ########################[ vpn_ip: virtual private network indicator ]#########################
   typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=4
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(proton|gpd|wg|(.*tun)|tailscale)[0-9]*'
   typeset -g POWERLEVEL9K_VPN_IP_SHOW_ALL=false
-  # Custom icon.
   typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION='VPN'
 
-  ####################################[ time: current time ]####################################
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=6
   typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
   typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false

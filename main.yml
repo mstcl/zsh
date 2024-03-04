@@ -7,6 +7,7 @@
 
   tasks:
     - name: Download core packages
+      packages: true
       become: true
       ansible.builtin.package:
         name:
@@ -14,6 +15,7 @@
         state: present
 
     - name: Download utilities
+      packages: true
       become: true
       block:
         - name: Download fzf
@@ -44,6 +46,12 @@
           ansible.builtin.package:
             name:
               - eza
+            state: present
+        - name: Download direnv
+          when: utilities.direnv
+          ansible.builtin.package:
+            name:
+              - direnv
             state: present
 
     - name: Download plugins

@@ -1,0 +1,74 @@
+###################################
+#  Make directory & move into it  #
+###################################
+
+function mkcd {
+	command mkdir $1 && cd $1
+}
+
+############################
+#  Git commit interactive  #
+############################
+
+gcm() {
+	echo -e "Enter commit message:"
+	message=""
+	while [ -z "$message" ]; do
+		IFS= read -r message
+		wait
+		sleep 1
+	done
+	git commit -m "$message"
+	message=""
+}
+
+########################
+#  Aur install/remove  #
+########################
+
+function ins {
+	{{ aur_helper }} -Sl | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' |
+		awk '{ print $2 " " $4 $5 }' |
+		sed 's/installed/i/' |
+		fzf --border=top \
+			--border-label="Select package(s) to install" \
+			--delimiter " " \
+			--preview-window=nohidden \
+			--preview '{{ aur_helper }} -Si {1}' |
+		awk '{ print $1 }' |
+		xargs -ro {{ aur_helper }} -S \
+		{%if aur_helper != "sudo pacman" %} --sudoloop --removemake --cleanafter{% endif %}
+}
+function rem() {
+	{{ aur_helper }} -Qq | fzf -q "$1" --border=top \
+		--border-label="Select package(s) to uninstall" \
+		--preview-window=nohidden --preview '{{ aur_helper }} -Qi {1}' |
+		xargs -ro {{ aur_helper }} -Rns
+}
+
+##########################
+#  Open files in neovim  #
+##########################
+
+{% if utilities.fzf %}
+function rgf() {
+	rg --line-number --no-heading --smart-case --color=never \
+		--no-ignore-vcs --ignore-file ~/.config/fd/ignore "${*:-}" |
+		fzf --preview-window=nohidden \
+			--border-label="Found matches in the following files" \
+			--border=top --preview-window=nohidden:up \
+			--delimiter : \
+			--preview-window 'up,60%,+{2}+3/3,~3' \
+			--preview "bat --style=numbers,header --color=always {1} --highlight-line {2} \
+    2> /dev/null" \
+			--bind 'enter:become(nvim {1} +{2})'
+}
+
+function fv() {
+	nvim $(fzf \
+		--preview-window=nohidden \
+		--border=top \
+		--border-label="Pick a file to open in neovim")
+}
+
+{% endif %}

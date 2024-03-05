@@ -1,0 +1,134 @@
+##########
+#  Sudo  #
+##########
+
+alias sudo="sudo "
+alias sunv='sudo -E nvim $1'
+alias sue='sudo -E $1'
+
+###########################
+#  Force colored outputs  #
+###########################
+
+alias grep='grep --color=always'
+alias fgrep='fgrep --color=always'
+alias egrep='egrep --color=always'
+alias diff='diff --color=always'
+alias ip='ip --color=always'
+{% if utilities.grc %}
+alias fdisk="sudo grc fdisk -l"
+{% endif %}
+
+#####################
+#  File operations  #
+#####################
+
+alias mkp="mkdir -p" # [mk]dir -[p]
+alias t='touch'      # [t]ouch
+alias mv='mv -iv'
+alias rm='rm -iv'
+alias cp='cp -iv'
+alias ln='ln -iv'
+
+alias rmv='trash-put'     # [r]e[m]o[v]e
+alias rst='trash-restore' # [r]e[st]ore
+
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+alias q='exit' # [q]uit
+
+#########
+#  Bat  #
+#########
+
+alias b='bat'                     # [b]at
+alias bp='bat -pp --color=always' # [b]at [p]lain
+
+##########
+#  Nvim  #
+##########
+
+alias nv='nvim' # [nv]im
+
+###############
+#  Systemctl  #
+###############
+
+alias sc='sudo systemctl'    # [s]ystem[c]tl
+alias scu='systemctl --user' # [s]ystem[c]tl [u]ser
+
+#############
+#  Ansible  #
+#############
+
+alias ap="ansible-playbook"    # [a]nsible [p]laybook
+alias ac="ansible-playbook -C" # [a]nsible [c]heck only
+
+#######################
+#  Directory listing  #
+#######################
+
+{% if utilities.eza %}
+alias lt='eza --color=always -h --git --git-ignore --group-directories-first -T'                                  # [l]ist [t]ree
+alias lta='eza --color=always -h --group-directories-first --git --git-ignore -T -a'                              # list tree all
+alias l='eza --color=always --group-directories-first -h --git --git-ignore'                                      # [l]ist
+alias la='eza --color=always --group-directories-first -h --git -a'                                               # [l]ist all
+alias ll='eza -l --color=always --group-directories-first -h --git'                                               # [l]ist [l]ong
+alias lla='eza -l --color=always --group-directories-first -h --git -a'                                           # [l]ist [l]ong [a]ll
+alias tree='erd --color force --hidden -L 3 --no-progress --suppress-size --no-git --no-ignore -x -f -y inverted' # tree replacement
+{% else %}
+alias l='ls'       # [l]ist
+alias ll='ls -lh'  # [l]ist [l]ong
+alias la='ls -lha' # [l]ist [a]ll
+{% endif %}
+
+#########
+#  Git  #
+#########
+
+alias g='git'                # [g]it
+alias gsa='git status'       # [g]it [s]tatus [a]ll
+alias gss='git status -s'    # [g]it [s]tatus [s]taged
+alias gre='git remote -v'    # [g]it [re]mote
+alias gdi='git diff'         # [g]it [di]ff
+alias gin='git init'         # [g]it [in]it
+alias gpu='git push'         # [g]it [pu]sh
+alias gad='git add'          # [g]it [ad]d
+alias gfe='git fetch'        # [g]it [fe]tch
+alias gra='git remote add'   # [g]it [r]emote [a]dd
+alias glo='git log'          # [g]it [lo]g
+alias gpl='git pull'         # [g]it [p]u[l]l
+alias gcl='git clone'        # [g]it [cl]one
+alias gbr='git branch'       # [g]it [br]anch
+alias gco='git checkout'     # [g]it [c]heck[o]ut
+alias gsl='git shortlog -sn' # [g]it [s]hort[log]
+alias gcp='git cherry-pick'  # [g]it [c]herry [p]ick
+
+##################
+#  Pacman & aur  #
+##################
+
+{% if aur_helper != "sudo pacman" %}
+alias pst='{{ aur_helper }} -Ps'                                     # [st]ats
+alias pnw='{{ aur_helper }} -Pw'                                     # [n]e[w]s
+{% endif %}
+alias pup='{{ aur_helper }} -Syu --removemake --sudoloop'            # [up]date
+alias pid='{{ aur_helper }} -U'                                      # [i]nstall from [d]atabase
+alias pir='{{ aur_helper }} -S'                                      # [i]nstall from [r]emote
+alias pni='{{ aur_helper }} -Qi'                                     # i[n]fo of [i]nstalled
+alias pna='{{ aur_helper }} -Si'                                     # i[n]fo of [a]ny
+alias psi='{{ aur_helper }} -Qs'                                     # [s]each [i]nstalled
+alias psa='{{ aur_helper }} -Ss'                                     # [s]earch [a]ny
+alias pfi='{{ aur_helper }} -Qo'                                     # [f]ile owned by [i]nstalled
+alias pfa='{{ aur_helper }} -F'                                      # [f]ile owned by [a]ny
+alias plf='{{ aur_helper }} -Ql'                                     # [l]ist [f]iles owned
+alias pla='{{ aur_helper }} -Q'                                      # [l]ist [a]ll installed
+alias ple='{{ aur_helper }} -Qe'                                     # [l]ist [e]xplicit installed
+alias poa='{{ aur_helper }} -Qdt'                                    # [o]rphaned [a]ll
+alias poe='{{ aur_helper }} -Qet'                                    # [o]rphaned [e]xplicity
+alias pcd='{{ aur_helper }} -Scd'                                    # [c]lean and [d]elete cache
+alias pil="grep -i installed /var/log/pacman.log | cut -d ' ' -f1,4" # [i]nstalled [l]og
+alias prl="grep -i removed /var/log/pacman.log | cut -d ' ' -f1,4"   # [r]emoved [l]og
+alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [u]pdated [l]og

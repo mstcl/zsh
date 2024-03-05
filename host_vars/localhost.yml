@@ -8,6 +8,7 @@ system:
   data_location: "$XDG_DATA_HOME/zsh" # where to place history and plugins
   config_location: "$XDG_CONFIG_HOME/zsh" # where to place configs
   terminal: "" # the terminal to use (to set $TERM)
+  aur_helper: "yay" # supports paru or yay, change to 'sudo pacman' if not using
 
 # ~~ (1) UTILITIES  ~~
 
@@ -57,3 +58,14 @@ zprofile_variables: []
 
 # Configure directories to append to PATH here
 path: []
+
+# ~~ (5) FZF THEMING ~~
+
+# Make it look like nvim's telescope
+# Extra colors for FZF
+# The background color is set to grey (8)
+# Adjust accordingly
+fzf:
+  foreground: "#574b42"
+  preview_bg: "#ded8d3"
+  selected_bg: "#bdb1a8"

@@ -5,3 +5,8 @@
 .zprofile
 .zshenv
 .zshrc
+aliases.zsh
+keybindings.zsh
+fzf.zsh
+keybindings.zsh
+functions.zsh

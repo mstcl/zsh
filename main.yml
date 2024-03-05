@@ -136,6 +136,7 @@
         - "aliases.zsh"
         - "functions.zsh"
         - "fzf.zsh"
+        - "keybindings.zsh"
 
     - name: Make symbolic link to ZDOTDIR
       ansible.builtin.file:

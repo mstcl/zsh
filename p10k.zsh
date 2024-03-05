@@ -21,6 +21,7 @@
     command_execution_time
     background_jobs
     vim_shell
+    direnv
   )
 
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete

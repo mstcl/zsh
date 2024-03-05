@@ -1,0 +1,222 @@
+#################################
+#  Local environment variables  #
+#################################
+
+
+# fd default command
+FD_FLAGS='--strip-cwd-prefix --follow --no-ignore-vcs 2> /dev/null'
+
+# fzf height
+FZF_HEIGHT="100%"
+
+
+#####################
+#  Default configs  #
+#####################
+
+export FZF_DEFAULT_COMMAND="fd ${FD_FLAGS}"
+export FZF_DEFAULT_OPTS="
+    --color fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9
+    --color gutter:8,scrollbar:#574b42,label:1
+    --color border:8,info:#574b42,prompt:1,spinner:2
+    --color pointer:1,marker:4,separator:8,header:1
+    --color preview-bg:#ded8d3,preview-border:#ded8d3
+    --color preview-scrollbar:8,preview-label:1
+    --height ~$FZF_HEIGHT
+    --info=inline-right
+    --scrollbar='▓'
+    --preview-window hidden:border-sharp
+    --preview 'less {}'
+    --preview-label='PREVIEW'
+    --pointer=' ⇒'
+    --marker='✓ '
+    --prompt=' ➤ '
+    --tabstop=4
+    --layout=reverse
+    --margin=1,5
+    --padding=0,0
+    --multi
+    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
+    --bind 'ctrl-f:change-prompt( [F] ➤ )+reload(fd --type f ${FD_FLAGS})'
+    --bind 'ctrl-a:change-prompt( ➤ )+reload(fd ${FD_FLAGS})'
+    --bind '?:toggle-preview'
+    --bind 'ctrl-space:toggle'
+    --bind 'ctrl-j:toggle-out'
+    --bind 'ctrl-k:toggle-in'
+    --bind 'enter:accept'
+    --bind 'alt-i:accept'
+    --bind 'alt-a:toggle-all'
+    --bind 'tab:down'
+    --bind 'shift-tab:up'"
+
+
+############
+#  Ctrl-R  #
+############
+
+export FZF_CTRL_R_OPTS="
+    --info=hidden
+    --border=top
+    --preview 'echo {}'
+    --border-label='Command history'
+    --preview-window hidden
+    --bind 'enter:accept'"
+
+
+############
+#  Ctrl-T  #
+############
+
+export FZF_CTRL_T_COMMAND="fd ${FD_FLAGS}"
+export FZF_CTRL_T_OPTS="
+    --select-1
+    --exit-0
+    --border=top
+    --border-label='Fuzzy search'"
+
+
+##########################
+#  Tab completion setup  #
+##########################
+
+# Use external sources
+source $XDG_DATA_HOME/zsh/plugins/fzf-tab-source/*.plugin.zsh
+
+# General
+zstyle ':fzf-tab:complete:*:*' fzf-preview \
+  'less ${(Q)realpath}'
+
+zstyle ':fzf-tab:complete:*:*' fzf-flags \
+    --color=fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9 \
+    --color=gutter:8,scrollbar:#574b42,label:1 \
+    --color=border:8,info:#574b42,prompt:1,spinner:2 \
+    --color=pointer:1,marker:4,separator:8,header:1 \
+    --color=preview-bg:#ded8d3,preview-border:#ded8d3 \
+    --color=preview-scrollbar:8,preview-label:1 \
+    --min-height="5" \
+    --height="~$FZF_HEIGHT" \
+    --info=inline-right \
+    --scrollbar='▓'
+
+# Group colors
+FZF_TAB_GROUP_COLORS=(
+    $'\033[33m' $'\033[34m' $'\033[33m' $'\033[34m' $'\033[33m' $'\033[34m'
+)
+zstyle ':fzf-tab:*' group-colors $FZF_TAB_GROUP_COLORS
+
+# Switch group bindings
+zstyle ':fzf-tab:*' switch-group 'ctrl-h' 'ctrl-l'
+
+# Disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# Set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# Set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# TLDR preview
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview \
+	'tldr --color always $word'
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-flags \
+    --border=top \
+    --border-label="TLDR" \
+    --height="90%" \
+    --preview-window=right,80%,nohidden
+
+# Preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-flags \
+    --border=top \
+    --border-label="Enter directory" \
+    --height="90%" \
+    --preview-window=nohidden
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# Ps
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:ps:argument-rest' fzf-preview \
+    '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:ps:argument-rest' fzf-flags \
+    --border=top \
+    --border-label="Processes" \
+    --height="90%" \
+    --preview-window=nohidden:up:3:wrap
+
+# Kill
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview \
+    '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags \
+    --border=top \
+    --border-label="Kill process" \
+    --height="90%" \
+    --preview-window=nohidden:up:3:wrap
+
+# Systemctl
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='systemd services' \
+    --preview-window=up:nohidden:wrap
+
+# Env vars
+zstyle ':fzf-tab:user-expand::' \
+    fzf-preview 'less $word'
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Environment variables' \
+    --preview-window=up:nohidden:wrap
+
+# Git
+zstyle ':fzf-tab:complete:git-*:*' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Git' \
+	--preview-window=wrap:nohidden
+
+# # Man
+
+zstyle ':fzf-tab:complete:(\\|)run-help' fzf-preview \
+  'run-help $word | bat -lman'
+
+zstyle ':fzf-tab:complete:(\\|)run-help:' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Git' \
+	--preview-window=wrap:nohidden
+
+zstyle ':fzf-tab:complete:(\\|*/|)man:' fzf-preview \
+  'man $word | bat -lman'
+
+zstyle ':fzf-tab:complete:(\\|*/|)man:' fzf-flags \
+    --border=top \
+    --height="90%" \
+    --border-label='Man' \
+	--preview-window=wrap:nohidden
+
+# Accept when enter (but not execute)
+zstyle ':fzf-tab:*' fzf-bindings 'enter:accept'
+
+
+########################
+#  Zoxide interactive  #
+########################
+
+export _ZO_FZF_OPTS="${FZF_DEFAULT_OPTS}
+    --no-sort
+    --border=top
+    --border-label='Quick jump to directory'
+    --preview-window nohidden:border-sharp
+    --bind 'ctrl-d:'
+    --bind 'ctrl-f:'
+    --preview '$ERD_PREVIEW'
+    --preview-window border-sharp"
+
+
+##########################
+#  Unset local env vars  #
+##########################
+
+unset FD_FLAGS
+unset FZF_HEIGHT

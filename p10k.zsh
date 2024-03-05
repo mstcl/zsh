@@ -8,34 +8,35 @@
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
   autoload -Uz is-at-least && is-at-least 5.1 || return
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    context
+    direnv
     toolbox
     virtualenv
     dir
     vcs
+    newline
     prompt_char
   )
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    context
-    status
-    vpn_ip
     command_execution_time
     background_jobs
     vim_shell
-    direnv
+    vpn_ip
+    newline
+    status
   )
 
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete
   typeset -g POWERLEVEL9K_ICON_PADDING=none
   typeset -g POWERLEVEL9K_BACKGROUND=
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
-  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' '
+  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=' '
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
   typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=
-  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX=
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%242F┌─'
+  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%242F├─'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%242F└─'
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX=
   typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=
@@ -55,12 +56,10 @@
 
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=4
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
-  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=
 
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=
 
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=3
-  typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='SH'
 
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
@@ -90,11 +89,10 @@
   typeset -g POWERLEVEL9K_DIR_PREFIX=''
   typeset -g POWERLEVEL9K_DIR_SUFFIX=''
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
-  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=1
   typeset -g POWERLEVEL9K_DIR_SHORTENED_BACKGROUND=0
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=1
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=false
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   local anchor_files=(
     .bzr
     .citc
@@ -148,16 +146,16 @@
       local conflicted='%2F'    # red foreground
     else
       local       meta='%244F'  # grey foreground
-      local      clean='%244F'  # grey foreground
-      local   modified='%244F'  # grey foreground
-      local  untracked='%244F'  # grey foreground
-      local conflicted='%244F'  # grey foreground
+      local      clean='%244F'
+      local   modified='%244F'
+      local  untracked='%244F'
+      local conflicted='%244F'
     fi
     local res
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
       (( $#branch > 32 )) && branch[13,-13]="…"
-      res+="${meta}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res+="${meta}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%} "
     fi
     if [[ -n $VCS_STATUS_TAG
           && -z $VCS_STATUS_LOCAL_BRANCH
@@ -169,33 +167,31 @@
     [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&
       res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
-    fi
-    if [[ $VCS_STATUS_COMMIT_SUMMARY == (|*[^[:alnum:]])(wip|WIP)(|[^[:alnum:]]*) ]]; then
-      res+=" ${modified}☼"
+      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%} "
     fi
     if (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND )); then
-        (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+        (( VCS_STATUS_COMMITS_BEHIND )) && res+="${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
         (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND ))
-        (( VCS_STATUS_COMMITS_AHEAD  )) && res+=" ${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+        (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
     elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
-        res+=" ${clean}✓"
+        res+="${clean}✓"
     fi
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+="${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND ))
     (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     (( VCS_STATUS_STASHES        )) && res+="${clean}*${VCS_STATUS_STASHES}"
     [[ -n $VCS_STATUS_ACTION     ]] && res+="${conflicted}${VCS_STATUS_ACTION}"
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${conflicted}✗"
-    (( VCS_STATUS_NUM_STAGED     )) && res+="${modified}+"
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+="${modified}!"
-    (( VCS_STATUS_NUM_UNTRACKED  )) && res+="${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}"
+    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+="${modified}+${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+="${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNTRACKED  )) && res+="${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
     (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+="${modified}─"
     typeset -g my_git_format=$res
   }
   functions -M my_git_formatter 2>/dev/null
   typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=-1
   typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
+  typeset -g POWERLEVEL9K_VCS_MAX_SYNC_LATENCY_SECONDS=0
   typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
   typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${$((my_git_formatter(1)))+${my_git_format}}'
   typeset -g POWERLEVEL9K_VCS_LOADING_CONTENT_EXPANSION='${$((my_git_formatter(0)))+${my_git_format}}'
@@ -233,8 +229,7 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=''
 
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=8
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='♧'
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=5
 
   typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND=35
   typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND=220
@@ -268,7 +263,6 @@
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(proton|gpd|wg|(.*tun)|tailscale)[0-9]*'
   typeset -g POWERLEVEL9K_VPN_IP_SHOW_ALL=false
-  typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION='VPN'
 
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=6
   typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
@@ -279,6 +273,8 @@
   typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
   (( ! $+functions[p10k] )) || p10k reload
+
+  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=5
 }
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}

@@ -51,3 +51,23 @@ have to set those environment variables the first time you run the playbook:
 ```sh
 $ XDG_DATA_HOME=<> XDG_CONFIG_HOME=<> ansible-playbook main.yml
 ```
+
+## Keybindings
+
+Move forward (word): `Ctrl-F`
+Move previous (word): `Ctrl-B`
+
+Move forward (char): `Alt-F`
+Move previous (char): `Alt-B`
+
+Toggle sudo (insert): `Ctrl-X`
+Toggle sudo (normal): `<Esc><Esc>` (only if vimode is enabled)
+
+Toggle process bg <-> fg: `Ctrl-Z`
+
+Accept autosuggestion: `Ctrl-E`
+
+Repeat last command: `Ctrl-K`
+
+FZF files/dir search: `Ctrl-T`
+FZF history search: `Ctrl-R`

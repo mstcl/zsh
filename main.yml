@@ -55,12 +55,18 @@
             state: present
 
     - name: Download plugins
+      tags: plugins
       block:
         - name: Get zsh-defer
           ansible.builtin.include_role:
             name: get_plugins
           vars:
             get_plugins_repo: https://github.com/romkatv/zsh-defer
+        - name: Get zsh-you-should-use
+          ansible.builtin.include_role:
+            name: get_plugins
+          vars:
+            get_plugins_repo: https://github.com/MichaelAquilina/zsh-you-should-use
         - name: Get zsh-smartcache
           ansible.builtin.include_role:
             name: get_plugins
@@ -127,6 +133,9 @@
         - ".zshenv"
         - ".zprofile"
         - ".zshrc"
+        - "aliases.zsh"
+        - "functions.zsh"
+        - "fzf.zsh"
 
     - name: Make symbolic link to ZDOTDIR
       ansible.builtin.file:

@@ -4,9 +4,16 @@
 #################
 
 # This makes the prompt appear instantly
+{% if utilities.direnv %}
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+{% endif %}
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+{% if utilities.direnv %}
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+{% endif %}
+
 
 source {{ system.data_location}}/plugins/powerlevel10k/powerlevel10k.zsh-theme
 source {{ system.config_location }}/p10k.zsh

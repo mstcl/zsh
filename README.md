@@ -1,6 +1,6 @@
 # zsh
 
-__lckdscl's opinionated zsh configuration__
+**My opinionated zsh configuration.**
 
 
 ![preview](preview.png)

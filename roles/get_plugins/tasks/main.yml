@@ -1,5 +1,6 @@
 ---
 - name: Download {{ get_plugins_repo | basename }}
+  tags: plugins
   ansible.builtin.git:
     repo: "{{ get_plugins_repo }}"
     dest: "{{ system.data_location }}/plugins/{{ get_plugins_repo | basename }}"

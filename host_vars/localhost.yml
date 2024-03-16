@@ -112,6 +112,7 @@ zprofile_variables:
       /$HOME/.luarocks/share/lua/5.1/?.lua;\
       /$HOME/.luarocks/share/lua/5.1/?/init.lua"
   - ANSIBLE_VENV: "$HOME/projects/.ansible_venv"
+  - NODE_PATH: "$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
 
 # Configure directories to append to PATH here
 path:

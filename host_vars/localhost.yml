@@ -111,6 +111,7 @@ zprofile_variables:
       /usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;\
       /$HOME/.luarocks/share/lua/5.1/?.lua;\
       /$HOME/.luarocks/share/lua/5.1/?/init.lua"
+  - ANSIBLE_VENV: "$HOME/projects/.ansible_venv"
 
 # Configure directories to append to PATH here
 path:

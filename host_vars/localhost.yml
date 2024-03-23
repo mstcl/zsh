@@ -63,7 +63,6 @@ zprofile_variables:
   - DIFFPROG: "nvim"
   - EDITOR: "/usr/bin/nvim"
   - PAGER: "nvim -R"
-  - QT_QPA_PLATFORMTHEME: "qt5ct"
   - ANDROID_HOME: "$XDG_DATA_HOME/android"
   - GTK2_RC_FILES: "$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
   - CARGO_HOME: "$XDG_DATA_HOME/cargo"

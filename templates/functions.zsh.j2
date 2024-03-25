@@ -65,10 +65,7 @@ function rgf() {
 }
 
 function fv() {
-	nvim $(fzf \
-		--preview-window=nohidden \
-		--border=top \
-		--border-label="Pick a file to open in neovim")
+	nvim $(__fsel)
 }
 
 {% endif %}

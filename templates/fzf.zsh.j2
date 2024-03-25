@@ -4,7 +4,7 @@
 
 
 # fd default command
-FD_FLAGS='--strip-cwd-prefix --follow --no-ignore-vcs 2> /dev/null'
+FD_FLAGS='--strip-cwd-prefix --follow 2> /dev/null'
 
 # fzf height
 FZF_HEIGHT="100%"
@@ -36,9 +36,6 @@ export FZF_DEFAULT_OPTS="
     --margin=1,5
     --padding=0,0
     --multi
-    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
-    --bind 'ctrl-f:change-prompt( [F] ➤ )+reload(fd --type f ${FD_FLAGS})'
-    --bind 'ctrl-a:change-prompt( ➤ )+reload(fd ${FD_FLAGS})'
     --bind '?:toggle-preview'
     --bind 'ctrl-space:toggle'
     --bind 'ctrl-j:toggle-out'
@@ -72,7 +69,12 @@ export FZF_CTRL_T_OPTS="
     --select-1
     --exit-0
     --border=top
-    --border-label='Fuzzy search'"
+    --border-label='Files search'
+    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
+    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
+    --bind 'ctrl-f:change-prompt( [F] ➤ )+reload(fd --type f ${FD_FLAGS})'
+    --bind 'ctrl-a:change-prompt( ➤ )+reload(fd ${FD_FLAGS})'
+    --bind 'ctrl-g:change-prompt( ➤ )+reload(fd --no-ignore-vcs ${FD_FLAGS})'"
 
 
 ##########################

@@ -7,3 +7,6 @@ alias w='_weather() { curl -s wttr.in/“${1:-bristol}” | head -n 7 ;}; _weath
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias txc='perl ~/.local/share/texcount/texcount.pl'
+alias tb='toolbox'
+alias tbe='toolbox enter'
+alias tbr='toolbox run'

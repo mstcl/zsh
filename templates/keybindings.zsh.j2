@@ -121,7 +121,9 @@ __fsel() {
   local cmd="${FZF_CTRL_T_COMMAND}"
   setopt localoptions pipefail no_aliases 2> /dev/null
   local item
-  eval "$cmd" | FZF_DEFAULT_OPTS="--bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_T_OPTS-}" "fzf" -m "$@" | while read item; do
+  eval "$cmd" | FZF_DEFAULT_OPTS="--bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_T_OPTS-}" "fzf" \
+    --header=$'\e[1;34m<CTRL-G>\e[0m toggle gitignore\n\e[1;34m<CTRL-D/F/A>\e[0m filter directories/files/all' \
+    -m "$@" | while read item; do
     echo -n "${(q)item} "
   done
   local ret=$?

@@ -66,6 +66,9 @@ zprofile_variables:
   - DIFFPROG: "nvim"
   - EDITOR: "/usr/bin/nvim"
   - PAGER: "nvim -R"
+  - BAT_PAGER: "less -RF"
+  - BAT_THEME: "base16-256"
+  - BAT_STYLE: "plain"
   - GTK_IM_MODULE: "fcitx"
   - QT_IM_MODULE: "fcitx"
   - XMODIFIERS: "@im=fcitx"
@@ -104,12 +107,6 @@ zprofile_variables:
   - MYPY_CACHE_DIR: "$XDG_CACHE_HOME/mypy"
   - KERAS_HOME: "$XDG_STATE_HOME/keras"
   - TEXMFVAR: "$XDG_CACHE_HOME/texlive/texmf-var"
-  - LUA_PATH: "/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;\
-      /usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;\
-      /usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;\
-      /usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;\
-      /$HOME/.luarocks/share/lua/5.1/?.lua;\
-      /$HOME/.luarocks/share/lua/5.1/?/init.lua"
   - ANSIBLE_VENV: "$HOME/projects/.ansible_venv"
   - NODE_PATH: "$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
 

@@ -13,13 +13,13 @@ kind=${mime##*/}
 if [ -d "$1" ]; then
 	if has_cmd erd; then
 		erd --color force --hidden -L 1 --no-progress --suppress-size --no-git \
-		  --no-ignore -x -f -y inverted "$1" | head -200
+			--no-ignore -x -f -y inverted "$1" | head -200
 	fi
 elif [ "$category" = image ]; then
 	chafa "$1"
 	exiftool "$1"
 elif [ "$category" = text ]; then
-	bat "$1"
+	bat --color=always --paging=never "$1"
 else
-	lesspipe.sh "$1" | bat
+	lesspipe.sh "$1" | bat --color=always --paging=never
 fi

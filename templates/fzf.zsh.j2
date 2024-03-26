@@ -26,7 +26,7 @@ export FZF_DEFAULT_OPTS="
     --info=inline-right
     --scrollbar='▓'
     --preview-window hidden:border-sharp
-    --preview 'less {}'
+    --preview '~/.lessfilter {}'
     --preview-label='PREVIEW'
     --pointer=' ⇒'
     --marker='✓ '
@@ -69,12 +69,7 @@ export FZF_CTRL_T_OPTS="
     --select-1
     --exit-0
     --border=top
-    --border-label='Files search'
-    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
-    --bind 'ctrl-d:change-prompt( [D] ➤ )+reload(fd --type d ${FD_FLAGS})'
-    --bind 'ctrl-f:change-prompt( [F] ➤ )+reload(fd --type f ${FD_FLAGS})'
-    --bind 'ctrl-a:change-prompt( ➤ )+reload(fd ${FD_FLAGS})'
-    --bind 'ctrl-g:change-prompt( ➤ )+reload(fd --no-ignore-vcs ${FD_FLAGS})'"
+    --border-label='Files search'"
 
 
 ##########################
@@ -85,9 +80,6 @@ export FZF_CTRL_T_OPTS="
 source $XDG_DATA_HOME/zsh/plugins/fzf-tab-source/*.plugin.zsh
 
 # General
-zstyle ':fzf-tab:complete:*:*' fzf-preview \
-  'less ${(Q)realpath}'
-
 zstyle ':fzf-tab:complete:*:*' fzf-flags \
     --color=fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9 \
     --color=gutter:8,scrollbar:#574b42,label:1 \

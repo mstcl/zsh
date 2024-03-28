@@ -114,6 +114,7 @@ zprofile_variables:
 path:
   - "$HOME/.local/share/applications"
   - "$HOME/.local/bin"
+  - "$HOME/bin"
   - "$HOME/scripts/bin"
   - "$HOME/.local/share/cargo/bin"
   - "$HOME/.local/share/go/bin"

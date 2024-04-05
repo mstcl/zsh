@@ -69,6 +69,7 @@ zprofile_variables:
   - BAT_PAGER: "less -RF"
   - BAT_THEME: "base16-256"
   - BAT_STYLE: "plain"
+  - QT_QPA_PLATFORMTHEME: "qt6ct"
   - GTK_IM_MODULE: "fcitx"
   - QT_IM_MODULE: "fcitx"
   - XMODIFIERS: "@im=fcitx"

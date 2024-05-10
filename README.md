@@ -2,9 +2,6 @@
 
 **My opinionated zsh configuration.**
 
-
-![preview](preview.png)
-
 ## Features
 
 Functional, speedy, and clean.

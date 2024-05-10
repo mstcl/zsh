@@ -7,7 +7,6 @@ current_user: "{{ lookup('env', 'USER') }}"
 system:
   data_location: "$XDG_DATA_HOME/zsh" # where to place history and plugins
   config_location: "$XDG_CONFIG_HOME/zsh" # where to place configs
-  terminal: "" # the terminal to use (to set $TERM)
   aur_helper: "yay" # supports paru or yay, change to 'sudo pacman' if not using
 
 # ~~ (1) UTILITIES  ~~

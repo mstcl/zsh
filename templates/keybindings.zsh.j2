@@ -78,9 +78,10 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
 )
 
 {% if utilities.fzf %}
-###############################
-#  Instant history accepting  #
-###############################
+
+####################
+#  History search  #
+####################
 
 # Ctrl-R to open history prompt and execute selected line
 fzf-history-widget() {
@@ -105,11 +106,11 @@ fzf-history-widget-accept() {
     fzf-history-widget
     zle accept-line
 }
-zle -N fzf-history-widget-accept
-bindkey '^R' fzf-history-widget-accept
-bindkey -M emacs '^R' fzf-history-widget-accept
-bindkey -M vicmd '^R' fzf-history-widget-accept
-bindkey -M viins '^R' fzf-history-widget-accept
+zle -N fzf-history-widget
+bindkey '^R' fzf-history-widget
+bindkey -M emacs '^R' fzf-history-widget
+bindkey -M vicmd '^R' fzf-history-widget
+bindkey -M viins '^R' fzf-history-widget
 
 
 ##############
@@ -123,7 +124,7 @@ __fsel() {
   local item
   local fd_flags='--strip-cwd-prefix --follow 2> /dev/null'
   eval "$cmd" | FZF_DEFAULT_OPTS="--bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_T_OPTS-}" "fzf" \
-    --header=$'\e[1;34m<CTRL-G>\e[0m toggle gitignore\n' \
+    --header=$'\e[1;34m<ctrl-g>\e[0m toggle gitignore\n\n' \
     --bind 'ctrl-g:transform:[[ ! $FZF_PROMPT =~ GI ]] &&
         echo "change-prompt([GI] ➤ )+reload(fd --no-ignore-vcs ${fd_flags})" ||
         echo "change-prompt( ➤ )+reload(fd ${fd_flags})"' \

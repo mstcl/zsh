@@ -31,6 +31,7 @@ export FZF_DEFAULT_OPTS="
     --pointer='▌'
     --marker='▎'
     --prompt=' ➤ '
+    --highlight-line
     --tabstop=4
     --layout=reverse
     --margin=1,5
@@ -40,6 +41,8 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-space:toggle'
     --bind 'ctrl-j:toggle-out'
     --bind 'ctrl-k:toggle-in'
+    --bind 'ctrl-n:preview-up'
+    --bind 'ctrl-p:preview-down'
     --bind 'enter:accept'
     --bind 'alt-i:accept'
     --bind 'alt-a:toggle-all'
@@ -69,7 +72,7 @@ export FZF_CTRL_T_OPTS="
     --select-1
     --exit-0
     --border=top
-    --border-label='Files search'"
+    --border-label='Search files'"
 
 
 ##########################
@@ -133,7 +136,7 @@ zstyle ':fzf-tab:complete:ps:argument-rest' fzf-preview \
     '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:ps:argument-rest' fzf-flags \
     --border=top \
-    --border-label="Processes" \
+    --border-label="Running processes" \
     --height="90%" \
     --preview-window=nohidden:up:3:wrap
 
@@ -142,7 +145,7 @@ zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview \
     '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags \
     --border=top \
-    --border-label="Kill process" \
+    --border-label="Terminate process" \
     --height="90%" \
     --preview-window=nohidden:up:3:wrap
 
@@ -150,7 +153,7 @@ zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags \
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-flags \
     --border=top \
     --height="90%" \
-    --border-label='systemd services' \
+    --border-label='Systemd services' \
     --preview-window=up:nohidden:wrap
 
 # Env vars
@@ -169,7 +172,7 @@ zstyle ':fzf-tab:complete:git-*:*' fzf-flags \
     --border-label='Git' \
 	--preview-window=wrap:nohidden
 
-# # Man
+# Man
 
 zstyle ':fzf-tab:complete:(\\|)run-help' fzf-preview \
   'run-help $word | bat -lman'
@@ -177,7 +180,7 @@ zstyle ':fzf-tab:complete:(\\|)run-help' fzf-preview \
 zstyle ':fzf-tab:complete:(\\|)run-help:' fzf-flags \
     --border=top \
     --height="90%" \
-    --border-label='Git' \
+    --border-label='Man' \
 	--preview-window=wrap:nohidden
 
 zstyle ':fzf-tab:complete:(\\|*/|)man:' fzf-preview \
@@ -200,7 +203,7 @@ zstyle ':fzf-tab:*' fzf-bindings 'enter:accept'
 export _ZO_FZF_OPTS="${FZF_DEFAULT_OPTS}
     --no-sort
     --border=top
-    --border-label='Quick jump to directory'
+    --border-label='Zoxide'
     --preview-window nohidden:border-sharp
     --bind 'ctrl-d:'
     --bind 'ctrl-f:'

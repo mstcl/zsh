@@ -22,6 +22,8 @@ gcm() {
 	message=""
 }
 
+{% if utilities.fzf %}
+
 ########################
 #  Aur install/remove  #
 ########################
@@ -46,11 +48,10 @@ function rem() {
 		xargs -ro {{ system.aur_helper }} -Rns
 }
 
-##########################
-#  Open files in neovim  #
-##########################
+####################
+#  Ripgrep search  #
+####################
 
-{% if utilities.fzf %}
 function rgf() {
 	rg --line-number --no-heading --smart-case --color=never \
 		--no-ignore-vcs --ignore-file ~/.config/fd/ignore "${*:-}" |
@@ -64,8 +65,24 @@ function rgf() {
 			--bind 'enter:become(nvim {1} +{2})'
 }
 
+##########################
+#  Open files in neovim  #
+##########################
+
 function fv() {
 	nvim $(__fsel)
+}
+
+##########################
+#  Choose under ~/.venv  #
+##########################
+
+function avenv() {
+  venv=$(ls ~/.venv/ | fzf)
+  if [[ $? == 130 ]]; then
+  	return
+  fi
+  source "$HOME/.venv/$venv/bin/activate"
 }
 
 {% endif %}

@@ -46,6 +46,7 @@ zshenv_variables:
   - XDG_CACHE_HOME: "$HOME/.cache"
   - XDG_DATA_HOME: "$HOME/.local/share"
   - XDG_STATE_HOME: "$HOME/.local/share"
+  - XDG_DATA_DIRS: "$HOME/.local/share:/usr/share:/usr/local/share"
   - ZDOTDIR: "{{ system.config_location }}"
   - ERR_FILE: "$XDG_CACHE_HOME/X11/xsession-errors"
 
@@ -55,6 +56,7 @@ zshenv_variables:
 # We can set stuff like PATH here
 # Expects a list.
 zprofile_variables:
+  - XDG_DATA_DIRS: "$HOME/.local/share:/usr/share:/usr/local/share"
   - TRASH: "$XDG_DATA_HOME/Trash/files"
   - _GL_SYNC_DISPLAY_DEVICE: "DP-2"
   - VDPAU_DRIVER: "nvidia"
@@ -106,7 +108,7 @@ zprofile_variables:
   - MYPY_CACHE_DIR: "$XDG_CACHE_HOME/mypy"
   - KERAS_HOME: "$XDG_STATE_HOME/keras"
   - TEXMFVAR: "$XDG_CACHE_HOME/texlive/texmf-var"
-  - ANSIBLE_VENV: "$HOME/projects/.ansible_venv"
+  - ANSIBLE_VENV: "$HOME/.venv/ansible_venv"
   - NODE_PATH: "$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
 
 # Configure directories to append to PATH here

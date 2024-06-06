@@ -78,7 +78,7 @@ function fv() {
 ##########################
 
 function avenv() {
-  venv=$(ls ~/.venv/ | fzf)
+  venv=$(ls ~/.venv/ | fzf --border=top --border-label="Python virtual env")
   if [[ $? == 130 ]]; then
   	return
   fi

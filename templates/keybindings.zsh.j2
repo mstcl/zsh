@@ -118,7 +118,7 @@ bindkey -M viins '^R' fzf-history-widget
 ##############
 
 # Ctrl-T to open standard FZF prompt
-__fsel() {
+__fzf_select() {
   local cmd="${FZF_CTRL_T_COMMAND}"
   setopt localoptions pipefail no_aliases 2> /dev/null
   local item
@@ -137,7 +137,7 @@ __fsel() {
 }
 
 fzf-file-widget() {
-  LBUFFER="${LBUFFER}$(__fsel)"
+  LBUFFER="${LBUFFER}$(__fzf_select)"
   local ret=$?
   zle reset-prompt
   return $ret

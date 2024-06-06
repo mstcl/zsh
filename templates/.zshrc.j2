@@ -73,6 +73,8 @@ zsh-defer source {{ system.data_location }}/plugins/zsh-syntax-highlighting/zsh-
 ######################
 
 typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets)
+ZSH_HIGHLIGHT_STYLES[comment]='fg=8,bold'
 ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
 ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=blue'

@@ -16,17 +16,17 @@ FZF_HEIGHT="100%"
 
 export FZF_DEFAULT_COMMAND="fd ${FD_FLAGS}"
 export FZF_DEFAULT_OPTS="
-    --color fg:#574b42,bg:8,hl:2,fg+:7,bg+:#bdb1a8,hl+:9
-    --color gutter:8,scrollbar:#574b42,label:1
-    --color border:8,info:#574b42,prompt:1,spinner:2
-    --color pointer:1,marker:#574b42,separator:8,header:1
-    --color preview-bg:#ded8d3,preview-border:#ded8d3
+    --color fg:7,bg:8,hl:2,fg+:7,bg+:{{ fzf.selected_bg }},hl+:9
+    --color gutter:8,scrollbar:7,label:7:bold
+    --color border:8,info:16,prompt:1,spinner:2
+    --color pointer:1,marker:7,separator:8,header:1
+    --color preview-bg:{{ fzf.preview_bg }},preview-border:{{ fzf.preview_bg }}
     --color preview-scrollbar:8,preview-label:1
     --height ~$FZF_HEIGHT
     --info=inline-right
     --scrollbar='▓'
     --preview-window hidden:border-sharp
-    --preview '~/.lessfilter {}'
+    --preview 'lesspipe.sh {}'
     --preview-label='PREVIEW'
     --pointer='▌'
     --marker='▎'
@@ -67,8 +67,9 @@ export FZF_CTRL_R_OPTS="
 #  Ctrl-T  #
 ############
 
-export FZF_CTRL_T_COMMAND="fd ${FD_FLAGS}"
+export FZF_CTRL_T_COMMAND="fd --color=always ${FD_FLAGS}"
 export FZF_CTRL_T_OPTS="
+    --ansi
     --select-1
     --exit-0
     --border=top
@@ -169,8 +170,7 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 zstyle ':fzf-tab:complete:git-*:*' fzf-flags \
     --border=top \
     --height="90%" \
-    --border-label='Git' \
-	--preview-window=wrap:nohidden
+    --border-label='Git'
 
 # Man
 

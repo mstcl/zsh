@@ -83,6 +83,7 @@ zprofile_variables:
   - BUNDLE_USER_PLUGIN: "$XDG_DATA_HOME/bundle"
   - _JAVA_OPTIONS: "-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
   - _JAVA_OPTIONS: "-Djavafx.cachedir=$XDG_CACHE_HOME/openjfx"
+  - JAVA_HOME: "$XDG_DATA_HOME/nvim/mason/packages/ltex-ls/ltex-ls-16.0.0/jdk-11.0.12+7"
   - CONAN_USER_HOME: "$XDG_CONFIG_HOME/conan"
   - ANDROID_HOME: "$XDG_DATA_HOME/android"
   - MYSQL_HISTFILE: "$XDG_DATA_HOME/mysql/mysql_history"
@@ -110,15 +111,15 @@ zprofile_variables:
   - TEXMFVAR: "$XDG_CACHE_HOME/texlive/texmf-var"
   - ANSIBLE_VENV: "$HOME/.venv/ansible_venv"
   - NODE_PATH: "$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
+  - ZK_NOTEBOOK_DIR: "$HOME/shared/wiki"
 
 # Configure directories to append to PATH here
 path:
   - "$HOME/.local/share/applications"
   - "$HOME/.local/bin"
   - "$HOME/bin"
-  - "$HOME/scripts/bin"
-  - "$HOME/.local/share/cargo/bin"
-  - "$HOME/.local/share/go/bin"
+  - "$CARGO_HOME/bin"
+  - "$GOPATH/bin"
 
 # ~~ (5) FZF THEMING ~~
 
@@ -127,6 +128,6 @@ path:
 # The background color is set to grey (8)
 # Adjust accordingly
 fzf:
-  foreground: "#574b42"
+  foreground: "#493f37"
   preview_bg: "#ded8d3"
-  selected_bg: "#bdb1a8"
+  selected_bg: "#bdb2a9"

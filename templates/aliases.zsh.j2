@@ -91,6 +91,8 @@ alias la='ls -lha' # [l]ist [a]ll
 alias g='git'                # [g]it
 alias gsa='git status'       # [g]it [s]tatus [a]ll
 alias gss='git status -s'    # [g]it [s]tatus [s]taged
+alias gst='git stash'        # [g]it [st]ash
+alias gsp='git stash pop'    # [g]it [s]tash [p]op
 alias gre='git remote -v'    # [g]it [re]mote
 alias gdi='git diff'         # [g]it [di]ff
 alias gin='git init'         # [g]it [in]it
@@ -100,11 +102,35 @@ alias gfe='git fetch'        # [g]it [fe]tch
 alias gra='git remote add'   # [g]it [r]emote [a]dd
 alias glo='git log'          # [g]it [lo]g
 alias gpl='git pull'         # [g]it [p]u[l]l
+alias grb='git rebase'       # [g]it [r]e[b]ase
 alias gcl='git clone'        # [g]it [cl]one
 alias gbr='git branch'       # [g]it [br]anch
 alias gco='git checkout'     # [g]it [c]heck[o]ut
 alias gsl='git shortlog -sn' # [g]it [s]hort[log]
 alias gcp='git cherry-pick'  # [g]it [c]herry [p]ick
+
+#############
+# Terraform #
+#############
+
+export TERRAFORM_ARGS="-parallelism=1"
+export TERRAFORM_BIN='terraform'
+alias tap="TF_CLI_ARGS=$TERRAFORM_ARGS $TERRAFORM_BIN apply" # [t]erraform [ap]ply
+alias tpl="$TERRAFORM_BIN plan"                              # [t]erraform [pl]an
+alias tim="$TERRAFORM_BIN import"                            # [t]erraform [im]port
+alias tin="$TERRAFORM_BIN init"                              # [t]erraform [in]it
+alias tcs="$TERRAFORM_BIN console"                           # [t]erraform [c]on[s]ole
+alias tva="$TERRAFORM_BIN validate"                          # [t]erraform [va]lidate
+alias tsl="$TERRAFORM_BIN show"                              # [t]erraform [sh]ow
+alias tsp="$TERRAFORM_BIN state pull > terraform.tfstate"    # [t]erraform [s]tate [p]ull
+alias tss="$TERRAFORM_BIN state show"                        # [t]erraform [s]tate [s]show
+alias tsl="$TERRAFORM_BIN state list"                        # [t]erraform [s]tate [l]ist
+alias tou="$TERRAFORM_BIN output"                            # [t]erraform [ou]put
+alias tfm="$TERRAFORM_BIN format"                            # [t]erraform [f]or[m]at
+alias tds="$TERRAFORM_BIN destroy"                           # [t]erraform [d]e[s]troy
+alias tre="$TERRAFORM_BIN refresh"                           # [t]erraform [re]fresh
+alias tta="$TERRAFORM_BIN taint"                             # [t]erraform [ta]int
+alias tut="$TERRAFORM_BIN untaint"                           # [t]erraform [u]n[t]aint
 
 ##################
 #  Pacman & aur  #

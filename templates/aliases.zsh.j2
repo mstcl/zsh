@@ -114,7 +114,7 @@ alias gcp='git cherry-pick'  # [g]it [c]herry [p]ick
 #############
 
 export TERRAFORM_ARGS="-parallelism=1"
-export TERRAFORM_BIN='terraform-1.8'
+export TERRAFORM_BIN='terraform'
 alias tap="TF_CLI_ARGS=$TERRAFORM_ARGS $TERRAFORM_BIN apply" # [t]erraform [ap]ply
 alias tpl="$TERRAFORM_BIN plan"                              # [t]erraform [pl]an
 alias tim="$TERRAFORM_BIN import"                            # [t]erraform [im]port

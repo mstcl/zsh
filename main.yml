@@ -104,6 +104,7 @@
             name: get_plugins
           vars:
             get_plugins_repo: https://github.com/Aloxaf/fzf-tab
+            get_plugins_depth: 3
         - name: Get fzf-tab-source
           when: plugins.fzf_tab
           ansible.builtin.include_role:

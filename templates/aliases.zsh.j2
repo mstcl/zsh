@@ -39,11 +39,13 @@ alias chgrp='chgrp --preserve-root'
 
 alias q='exit' # [q]uit
 
-#########
-#  Bat  #
-#########
+##############
+#  Bat/less  #
+##############
 
 alias b='bat'                     # [b]at
+alias cat='bat'                   # [b]at
+alias less='bat'                  # [bat]
 alias bp='bat -pp --color=always' # [b]at [p]lain
 
 ##########
@@ -71,18 +73,25 @@ alias ac="ansible-playbook -C" # [a]nsible [c]heck only
 #######################
 
 {% if utilities.eza %}
-alias lt='eza --color=always -h --git --git-ignore --group-directories-first -T'                                  # [l]ist [t]ree
-alias lta='eza --color=always -h --group-directories-first --git --git-ignore -T -a'                              # list tree all
-alias l='eza --color=always --group-directories-first -h --git --git-ignore'                                      # [l]ist
-alias la='eza --color=always --group-directories-first -h --git -a'                                               # [l]ist all
-alias ll='eza -l --color=always --group-directories-first -h --git'                                               # [l]ist [l]ong
-alias lla='eza -l --color=always --group-directories-first -h --git -a'                                           # [l]ist [l]ong [a]ll
-alias tree='erd --color force --hidden -L 3 --no-progress --suppress-size --no-git --no-ignore -x -f -y inverted' # tree replacement
+alias tree='eza --color=always -h --group-directories-first -T'                      # [l]ist [tree]
+alias lta='eza --color=always -h --group-directories-first --git --git-ignore -T -a' # list tree all
+alias l='eza --color=always --group-directories-first -h --git --git-ignore'         # [l]ist
+alias ls='eza --color=always --group-directories-first -h --git --git-ignore'        # [l]ist
+alias la='eza --color=always --group-directories-first -h --git -a'                  # [l]ist all
+alias ll='eza -l --color=always --group-directories-first -h --git'                  # [l]ist [l]ong
+alias lla='eza -l --color=always --group-directories-first -h --git -a'              # [l]ist [l]ong [a]ll
 {% else %}
 alias l='ls'       # [l]ist
 alias ll='ls -lh'  # [l]ist [l]ong
 alias la='ls -lha' # [l]ist [a]ll
 {% endif %}
+
+#################
+# Disk/fs usage #
+#################
+
+alias du='erd --no-git --hidden -H -i'
+alias df='duf -theme ansi'
 
 #########
 #  Git  #
@@ -138,24 +147,24 @@ alias tut="$TERRAFORM_BIN untaint"                           # [t]erraform [u]n[
 ##################
 
 {% if system.aur_helper != "sudo pacman" %}
-alias pst='{{ system.aur_helper }} -Ps'                                     # [st]ats
-alias pnw='{{ system.aur_helper }} -Pw'                                     # [n]e[w]s
+alias pst='{{ system.aur_helper }} -Ps' # [st]ats
+alias pnw='{{ system.aur_helper }} -Pw' # [n]e[w]s
 {% endif %}
-alias pup='{{ system.aur_helper }} -Syu --removemake --sudoloop'            # [up]date
-alias pid='{{ system.aur_helper }} -U'                                      # [i]nstall from [d]atabase
-alias pir='{{ system.aur_helper }} -S'                                      # [i]nstall from [r]emote
-alias pni='{{ system.aur_helper }} -Qi'                                     # i[n]fo of [i]nstalled
-alias pna='{{ system.aur_helper }} -Si'                                     # i[n]fo of [a]ny
-alias psi='{{ system.aur_helper }} -Qs'                                     # [s]each [i]nstalled
-alias psa='{{ system.aur_helper }} -Ss'                                     # [s]earch [a]ny
-alias pfi='{{ system.aur_helper }} -Qo'                                     # [f]ile owned by [i]nstalled
-alias pfa='{{ system.aur_helper }} -F'                                      # [f]ile owned by [a]ny
-alias plf='{{ system.aur_helper }} -Ql'                                     # [l]ist [f]iles owned
-alias pla='{{ system.aur_helper }} -Q'                                      # [l]ist [a]ll installed
-alias ple='{{ system.aur_helper }} -Qe'                                     # [l]ist [e]xplicit installed
-alias poa='{{ system.aur_helper }} -Qdt'                                    # [o]rphaned [a]ll
-alias poe='{{ system.aur_helper }} -Qet'                                    # [o]rphaned [e]xplicity
-alias pcd='{{ system.aur_helper }} -Scd'                                    # [c]lean and [d]elete cache
+alias pup='{{ system.aur_helper }} -Syu --removemake --sudoloop'     # [up]date
+alias pid='{{ system.aur_helper }} -U'                               # [i]nstall from [d]atabase
+alias pir='{{ system.aur_helper }} -S'                               # [i]nstall from [r]emote
+alias pni='{{ system.aur_helper }} -Qi'                              # i[n]fo of [i]nstalled
+alias pna='{{ system.aur_helper }} -Si'                              # i[n]fo of [a]ny
+alias psi='{{ system.aur_helper }} -Qs'                              # [s]each [i]nstalled
+alias psa='{{ system.aur_helper }} -Ss'                              # [s]earch [a]ny
+alias pfi='{{ system.aur_helper }} -Qo'                              # [f]ile owned by [i]nstalled
+alias pfa='{{ system.aur_helper }} -F'                               # [f]ile owned by [a]ny
+alias plf='{{ system.aur_helper }} -Ql'                              # [l]ist [f]iles owned
+alias pla='{{ system.aur_helper }} -Q'                               # [l]ist [a]ll installed
+alias ple='{{ system.aur_helper }} -Qe'                              # [l]ist [e]xplicit installed
+alias poa='{{ system.aur_helper }} -Qdt'                             # [o]rphaned [a]ll
+alias poe='{{ system.aur_helper }} -Qet'                             # [o]rphaned [e]xplicity
+alias pcd='{{ system.aur_helper }} -Scd'                             # [c]lean and [d]elete cache
 alias pil="grep -i installed /var/log/pacman.log | cut -d ' ' -f1,4" # [i]nstalled [l]og
 alias prl="grep -i removed /var/log/pacman.log | cut -d ' ' -f1,4"   # [r]emoved [l]og
 alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [u]pdated [l]og

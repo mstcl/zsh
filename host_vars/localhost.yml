@@ -114,20 +114,4 @@ zprofile_variables:
   - ZK_NOTEBOOK_DIR: "$HOME/shared/wiki"
 
 # Configure directories to append to PATH here
-path:
-  - "$HOME/.local/share/applications"
-  - "$HOME/.local/bin"
-  - "$HOME/bin"
-  - "$CARGO_HOME/bin"
-  - "$GOPATH/bin"
-
-# ~~ (5) FZF THEMING ~~
-
-# Make it look like nvim's telescope
-# Extra colors for FZF
-# The background color is set to grey (8)
-# Adjust accordingly
-fzf:
-  foreground: "#493f37"
-  preview_bg: "#ded8d3"
-  selected_bg: "#bdb2a9"
+path: []

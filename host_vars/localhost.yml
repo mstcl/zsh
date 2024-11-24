@@ -65,7 +65,7 @@ zprofile_variables:
   - MANPAGER: "/usr/bin/nvim +Man!"
   - DIFFPROG: "/usr/bin/nvim"
   - EDITOR: "/usr/bin/nvim"
-  - PAGER: "/usr/bin/nvim -R"
+  - PAGER: "less -R"
   - BAT_PAGER: "/usr/bin/less -RF"
   - BAT_THEME: "base16-256"
   - BAT_STYLE: "plain"

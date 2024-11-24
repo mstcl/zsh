@@ -9,6 +9,7 @@
   autoload -Uz is-at-least && is-at-least 5.1 || return
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     context
+    direnv
     virtualenv
     dir
     vcs
@@ -16,11 +17,12 @@
     prompt_char
   )
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+	time
     command_execution_time
     background_jobs
     vpn_ip
     newline
-    direnv
+	status
   )
 
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete
@@ -212,6 +214,17 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=''
 
+  typeset -g POWERLEVEL9K_TIME_FOREGROUND=8
+  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
+  typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
+
+  typeset -g POWERLEVEL9K_STATUS_OK=false
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE=true
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=3
+  typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=1
+  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
+
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=2
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='󰈆'
@@ -226,7 +239,7 @@
   typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
 
   typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=2
-  typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION=󰖂
+  typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION="󰖂"
   typeset -g POWERLEVEL9K_VPN_IP_CONTENT_EXPANSION=
   typeset -g POWERLEVEL9K_VPN_IP_INTERFACE='(proton|gpd|wg|(.*tun)|tailscale|wt)[0-9]*'
   typeset -g POWERLEVEL9K_VPN_IP_SHOW_ALL=false

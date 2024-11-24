@@ -16,16 +16,16 @@ FZF_HEIGHT="100%"
 
 export FZF_DEFAULT_COMMAND="fd ${FD_FLAGS}"
 export FZF_DEFAULT_OPTS="
-    --color fg:7,bg:8,hl:2,fg+:7,bg+:{{ fzf.selected_bg }},hl+:9
-    --color gutter:8,scrollbar:7,label:7:bold
+    --color fg:7,bg:0,hl:2,fg+:7,bg+:8,hl+:9
+    --color gutter:0,scrollbar:7,label:7:bold
     --color border:8,info:7,prompt:1,spinner:2
-    --color pointer:1,marker:7,separator:{{ fzf.selected_bg }},header:1
-    --color preview-bg:{{ fzf.preview_bg }},preview-border:{{ fzf.preview_bg }}
+    --color pointer:1,marker:7,separator:8,header:1
+    --color preview-bg:0,preview-border:8
     --color preview-scrollbar:8,preview-label:1
     --height ~$FZF_HEIGHT
     --no-scrollbar
     --info=default
-    --preview-window hidden:border-sharp
+    --preview-window 70%:hidden:border-sharp
     --preview 'lesspipe.sh {}'
     --pointer='▌'
     --marker='▎'
@@ -66,6 +66,7 @@ export FZF_CTRL_R_OPTS="
 
 export FZF_CTRL_T_COMMAND="fd --color=always ${FD_FLAGS}"
 export FZF_CTRL_T_OPTS="
+	--preview-window nohidden
     --ansi
     --select-1
     --exit-0"
@@ -80,11 +81,11 @@ source $XDG_DATA_HOME/zsh/plugins/fzf-tab-source/*.plugin.zsh
 
 # General
 zstyle ':fzf-tab:complete:*:*' fzf-flags \
-    --color fg:7,bg:8,hl:2,fg+:7,bg+:{{ fzf.selected_bg }},hl+:9 \
-    --color gutter:8,scrollbar:7,label:7:bold \
+    --color fg:7,bg:0,hl:2,fg+:7,bg+:8,hl+:9 \
+    --color gutter:0,scrollbar:7,label:7:bold \
     --color border:8,info:7,prompt:1,spinner:2 \
-    --color pointer:1,marker:7,separator:{{ fzf.selected_bg }},header:1 \
-    --color preview-bg:{{ fzf.preview_bg }},preview-border:{{ fzf.preview_bg }} \
+    --color pointer:1,marker:7,separator:8,header:1 \
+    --color preview-bg:0,preview-border:8 \
     --color preview-scrollbar:8,preview-label:1 \
 	--no-scrollbar
     --min-height="5" \

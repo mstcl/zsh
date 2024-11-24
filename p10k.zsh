@@ -159,7 +159,7 @@
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
       (( $#branch > 32 )) && branch[13,-13]="…"
-      res+="${meta}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%} "
+      res+="${meta}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}%8F:"
     fi
     if [[ -n $VCS_STATUS_TAG
           && -z $VCS_STATUS_LOCAL_BRANCH
@@ -171,13 +171,15 @@
     [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&
       res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%} "
+      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}%8F:"
     fi
     if (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND )); then
         (( VCS_STATUS_COMMITS_BEHIND )) && res+="${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
         (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND ))
         (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
-	fi
+    elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
+        res+="${clean}clean"
+    fi
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+="${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND ))
     (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"

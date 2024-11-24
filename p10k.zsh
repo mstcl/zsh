@@ -9,18 +9,16 @@
   autoload -Uz is-at-least && is-at-least 5.1 || return
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     context
-    direnv
-    virtualenv
     dir
     vcs
     newline
     prompt_char
   )
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-	time
     command_execution_time
     background_jobs
-    vpn_ip
+    direnv
+    virtualenv
     newline
 	status
   )
@@ -58,7 +56,8 @@
 
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=4
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
-  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION=
+  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=●
 
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_FOREGROUND="#79241f"
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=7
@@ -128,7 +127,7 @@
   typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT=50
   typeset -g POWERLEVEL9K_DIR_HYPERLINK=true
   typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=v3
-  typeset -g POWERLEVEL9K_LOCK_ICON='⊗'
+  typeset -g POWERLEVEL9K_LOCK_ICON='\UF023'
   typeset -g POWERLEVEL9K_DIR_CLASSES=(
   '*'            DEFAULT  '')
   typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=''
@@ -144,9 +143,9 @@
     fi
     if (( $1 )); then
       local       meta='%15F'   # default foreground
-      local      clean='%3F'    # green foreground
-      local   modified='%4F'    # yellow foreground
-      local  untracked='%5F'    # blue foreground
+      local      clean='%2F'    # green foreground
+      local   modified='%5F'    # purple foreground
+      local  untracked='%15F'   # grey foreground
       local conflicted='%2F'    # red foreground
     else
       local       meta='%244F'  # grey foreground
@@ -156,6 +155,7 @@
       local conflicted='%244F'
     fi
     local res
+	res+="%8F("
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
       (( $#branch > 32 )) && branch[13,-13]="…"
@@ -178,7 +178,7 @@
         (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND ))
         (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
     elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
-        res+="${clean}✓"
+        res+="${clean}"
     fi
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+="${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND ))
@@ -190,8 +190,10 @@
     (( VCS_STATUS_NUM_UNSTAGED   )) && res+="${modified}!${VCS_STATUS_NUM_UNSTAGED}"
     (( VCS_STATUS_NUM_UNTRACKED  )) && res+="${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
     (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+="${modified}─"
+	res+="%8F)"
     typeset -g my_git_format=$res
   }
+
   functions -M my_git_formatter 2>/dev/null
   typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=-1
   typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
@@ -236,7 +238,6 @@
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
   typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
   typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
-  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
 
   typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=2
   typeset -g POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION="󰖂"

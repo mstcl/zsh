@@ -87,11 +87,11 @@ zstyle ':fzf-tab:complete:*:*' fzf-flags \
     --color pointer:1,marker:7,separator:8,header:1 \
     --color preview-bg:0,preview-border:8 \
     --color preview-scrollbar:8,preview-label:1 \
-	--no-scrollbar
+    --preview-window 70%:nohidden:border-sharp \
+	--no-scrollbar \
     --min-height="5" \
     --height="~$FZF_HEIGHT" \
-    --info=default \
-    --scrollbar='▓'
+    --info=default
 
 # Group colors
 FZF_TAB_GROUP_COLORS=(
@@ -112,8 +112,6 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-flags \
-    --preview-window=nohidden
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # Kill
@@ -131,7 +129,6 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 	fzf-preview 'echo ${(P)word}'
 
 # Git
-zstyle ':fzf-tab:complete:git-*:*' fzf-flags \
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
 	'git diff $word | delta'
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview \

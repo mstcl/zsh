@@ -177,7 +177,6 @@
         (( VCS_STATUS_COMMITS_BEHIND )) && res+="${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
         (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND ))
         (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
-	fi
     elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
         res+="${clean}clean"
     fi

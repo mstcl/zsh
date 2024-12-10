@@ -114,4 +114,10 @@ zprofile_variables:
   - ZK_NOTEBOOK_DIR: "$HOME/shared/wiki"
 
 # Configure directories to append to PATH here
-path: []
+path:
+  - "$HOME/.local/share/applications"
+  - "$HOME/.local/bin"
+  - "$HOME/bin"
+  - "$HOME/scripts/bin"
+  - "$HOME/.local/share/cargo/bin"
+  - "$HOME/.local/share/go/bin"

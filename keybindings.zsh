@@ -77,7 +77,6 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     vi-find-next-char-skip
 )
 
-{% if utilities.fzf %}
 
 ####################
 #  History search  #
@@ -146,7 +145,6 @@ zle     -N            fzf-file-widget
 bindkey -M emacs '^T' fzf-file-widget
 bindkey -M vicmd '^T' fzf-file-widget
 bindkey -M viins '^T' fzf-file-widget
-{% endif %}
 
 
 ################################

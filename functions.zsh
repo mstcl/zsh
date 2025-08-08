@@ -22,30 +22,28 @@ gcm() {
 	message=""
 }
 
-{% if utilities.fzf %}
 
 ########################
 #  Aur install/remove  #
 ########################
 
 function ins {
-	{{ system.aur_helper }} -Sl | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' |
+	yay -Sl | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' |
 		awk '{ print $2 " " $4 $5 }' |
 		sed 's/installed/i/' |
 		fzf --border=top \
 			--border-label="Select package(s) to install" \
 			--delimiter " " \
 			--preview-window=nohidden \
-			--preview '{{ system.aur_helper }} -Si {1}' |
+			--preview 'yay -Si {1}' |
 		awk '{ print $1 }' |
-		xargs -ro {{ system.aur_helper }} -S \
-		{%if system.aur_helper != "sudo pacman" %} --sudoloop --removemake --cleanafter{% endif %}
-}
+		xargs -ro yay -S \
+		 --sudoloop --removemake --cleanafter}
 function rem() {
-	{{ system.aur_helper }} -Qq | fzf -q "$1" --border=top \
+	yay -Qq | fzf -q "$1" --border=top \
 		--border-label="Select package(s) to uninstall" \
-		--preview-window=nohidden --preview '{{ system.aur_helper }} -Qi {1}' |
-		xargs -ro {{ system.aur_helper }} -Rns
+		--preview-window=nohidden --preview 'yay -Qi {1}' |
+		xargs -ro yay -Rns
 }
 
 ####################
@@ -83,4 +81,3 @@ function avenv() {
   source "$HOME/.venv/$venv/bin/activate"
 }
 
-{% endif %}

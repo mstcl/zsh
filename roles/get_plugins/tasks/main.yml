@@ -1,9 +1,0 @@
----
-- name: Download {{ get_plugins_repo | basename }}
-  tags: plugins
-  ansible.builtin.git:
-    repo: "{{ get_plugins_repo }}"
-    dest: "{{ system.data_location }}/plugins/{{ get_plugins_repo | basename }}"
-    single_branch: "{{ get_plugins_single_branch | default('true') }}"
-    depth: "{{ get_plugins_depth | default('1') }}"
-    version: "{{ get_plugins_branch | default('master') }}"

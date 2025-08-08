@@ -80,18 +80,7 @@ export FZF_CTRL_T_OPTS="
 source $XDG_DATA_HOME/zsh/plugins/fzf-tab-source/*.plugin.zsh
 
 # General
-zstyle ':fzf-tab:complete:*:*' fzf-flags \
-    --color fg:7,bg:0,hl:2,fg+:7,bg+:8,hl+:9 \
-    --color gutter:0,scrollbar:7,label:7:bold \
-    --color border:8,info:7,prompt:1,spinner:2 \
-    --color pointer:1,marker:7,separator:8,header:1 \
-    --color preview-bg:0,preview-border:8 \
-    --color preview-scrollbar:8,preview-label:1 \
-    --preview-window 70%:nohidden:border-sharp \
-	--no-scrollbar \
-    --min-height="5" \
-    --height="~$FZF_HEIGHT" \
-    --info=default
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # Group colors
 FZF_TAB_GROUP_COLORS=(

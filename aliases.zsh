@@ -15,9 +15,7 @@ alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 alias diff='diff --color=always'
 alias ip='ip --color=always'
-{% if utilities.grc %}
 alias fdisk="sudo grc fdisk -l"
-{% endif %}
 
 #####################
 #  File operations  #
@@ -72,7 +70,6 @@ alias ac="ansible-playbook -C" # [a]nsible [c]heck only
 #  Directory listing  #
 #######################
 
-{% if utilities.eza %}
 alias tree='eza --color=always -h --group-directories-first -T'                      # [l]ist [tree]
 alias lta='eza --color=always -h --group-directories-first --git --git-ignore -T -a' # list tree all
 alias l='eza --color=always --group-directories-first -h --git --git-ignore'         # [l]ist
@@ -80,11 +77,6 @@ alias ls='eza --color=always --group-directories-first -h --git --git-ignore'   
 alias la='eza --color=always --group-directories-first -h --git -a'                  # [l]ist all
 alias ll='eza -l --color=always --group-directories-first -h --git'                  # [l]ist [l]ong
 alias lla='eza -l --color=always --group-directories-first -h --git -a'              # [l]ist [l]ong [a]ll
-{% else %}
-alias l='ls'       # [l]ist
-alias ll='ls -lh'  # [l]ist [l]ong
-alias la='ls -lha' # [l]ist [a]ll
-{% endif %}
 
 #################
 # Disk/fs usage #
@@ -118,6 +110,7 @@ alias gco='git checkout'                                     # [g]it [c]heck[o]u
 alias gsl='git shortlog -sn'                                 # [g]it [s]hort[log]
 alias gcp='git cherry-pick'                                  # [g]it [c]herry [p]ick
 alias gsu='git submodule update --recursive --remote --init' # [g]it [s]ubmodule [u]pdate
+alias gdis='DELTA_FEATURES=+side-by-side git diff'           # [g]it [di]ff [s]ide by side
 
 #############
 # Terraform #
@@ -146,25 +139,23 @@ alias tut="$TERRAFORM_BIN untaint"                           # [t]erraform [u]n[
 #  Pacman & aur  #
 ##################
 
-{% if system.aur_helper != "sudo pacman" %}
-alias pst='{{ system.aur_helper }} -Ps' # [st]ats
-alias pnw='{{ system.aur_helper }} -Pw' # [n]e[w]s
-{% endif %}
-alias pup='{{ system.aur_helper }} -Syu --removemake --sudoloop'     # [up]date
-alias pid='{{ system.aur_helper }} -U'                               # [i]nstall from [d]atabase
-alias pir='{{ system.aur_helper }} -S'                               # [i]nstall from [r]emote
-alias pni='{{ system.aur_helper }} -Qi'                              # i[n]fo of [i]nstalled
-alias pna='{{ system.aur_helper }} -Si'                              # i[n]fo of [a]ny
-alias psi='{{ system.aur_helper }} -Qs'                              # [s]each [i]nstalled
-alias psa='{{ system.aur_helper }} -Ss'                              # [s]earch [a]ny
-alias pfi='{{ system.aur_helper }} -Qo'                              # [f]ile owned by [i]nstalled
-alias pfa='{{ system.aur_helper }} -F'                               # [f]ile owned by [a]ny
-alias plf='{{ system.aur_helper }} -Ql'                              # [l]ist [f]iles owned
-alias pla='{{ system.aur_helper }} -Q'                               # [l]ist [a]ll installed
-alias ple='{{ system.aur_helper }} -Qe'                              # [l]ist [e]xplicit installed
-alias poa='{{ system.aur_helper }} -Qdt'                             # [o]rphaned [a]ll
-alias poe='{{ system.aur_helper }} -Qet'                             # [o]rphaned [e]xplicity
-alias pcd='{{ system.aur_helper }} -Scd'                             # [c]lean and [d]elete cache
+alias pst='yay -Ps' # [st]ats
+alias pnw='yay -Pw' # [n]e[w]s
+alias pup='yay -Syu --removemake --sudoloop'     # [up]date
+alias pid='yay -U'                               # [i]nstall from [d]atabase
+alias pir='yay -S'                               # [i]nstall from [r]emote
+alias pni='yay -Qi'                              # i[n]fo of [i]nstalled
+alias pna='yay -Si'                              # i[n]fo of [a]ny
+alias psi='yay -Qs'                              # [s]each [i]nstalled
+alias psa='yay -Ss'                              # [s]earch [a]ny
+alias pfi='yay -Qo'                              # [f]ile owned by [i]nstalled
+alias pfa='yay -F'                               # [f]ile owned by [a]ny
+alias plf='yay -Ql'                              # [l]ist [f]iles owned
+alias pla='yay -Q'                               # [l]ist [a]ll installed
+alias ple='yay -Qe'                              # [l]ist [e]xplicit installed
+alias poa='yay -Qdt'                             # [o]rphaned [a]ll
+alias poe='yay -Qet'                             # [o]rphaned [e]xplicity
+alias pcd='yay -Scd'                             # [c]lean and [d]elete cache
 alias pil="grep -i installed /var/log/pacman.log | cut -d ' ' -f1,4" # [i]nstalled [l]og
 alias prl="grep -i removed /var/log/pacman.log | cut -d ' ' -f1,4"   # [r]emoved [l]og
 alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [u]pdated [l]og

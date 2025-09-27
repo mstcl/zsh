@@ -47,7 +47,7 @@ export KERAS_HOME="$XDG_STATE_HOME/keras"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export ANSIBLE_VENV="$HOME/.venv/ansible_venv"
 export NODE_PATH="$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
-export ZK_NOTEBOOK_DIR="$HOME/shared/wiki"
+export ZK_NOTEBOOK_DIR="$HOME/projects/wiki"
 
 ##########################
 #  PATHS & FINAL CHECKS  #

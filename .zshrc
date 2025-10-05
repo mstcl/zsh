@@ -146,7 +146,6 @@ export EZA_COLORS="rs=0:mh=00:do=01;35:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42
 
 zsh-defer source "$ZDOTDIR"/functions.zsh
 zsh-defer source "$ZDOTDIR"/aliases.zsh
-zsh-defer source "$ZDOTDIR"/custom_aliases.zsh
 zsh-defer source "$ZDOTDIR"/fzf.zsh
 
 

@@ -81,3 +81,22 @@ function avenv() {
   source "$HOME/.venv/$venv/bin/activate"
 }
 
+##########################
+#   new feature branch   #
+##########################
+
+function nbr() {
+	type=$1
+	summary=$(echo $2 | tr " " "-")
+	ticket=$3
+
+	git fetch --prune --quiet
+	git checkout master --quiet
+	git merge origin/master --quiet
+
+	if [[ -n "$ticket" ]] then;
+	  type="/$type"
+	fi
+
+	git checkout -b "$ticket$type/$summary"
+}

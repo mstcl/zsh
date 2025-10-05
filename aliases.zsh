@@ -28,8 +28,8 @@ alias rm='rm -iv'
 alias cp='cp -iv'
 alias ln='ln -iv'
 
-alias rmv='gtrash put --home-fallback'     # [r]e[m]o[v]e
-alias rst='gtrash restore'                 # [r]e[st]ore
+alias rmv='gtrash put --home-fallback' # [r]e[m]o[v]e
+alias rst='gtrash restore'             # [r]e[st]ore
 
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
@@ -139,23 +139,41 @@ alias tut="$TERRAFORM_BIN untaint"                           # [t]erraform [u]n[
 #  Pacman & aur  #
 ##################
 
-alias pst='yay -Ps' # [st]ats
-alias pnw='yay -Pw' # [n]e[w]s
-alias pup='yay -Syu --removemake --sudoloop'     # [up]date
-alias pid='yay -U'                               # [i]nstall from [d]atabase
-alias pir='yay -S'                               # [i]nstall from [r]emote
-alias pni='yay -Qi'                              # i[n]fo of [i]nstalled
-alias pna='yay -Si'                              # i[n]fo of [a]ny
-alias psi='yay -Qs'                              # [s]each [i]nstalled
-alias psa='yay -Ss'                              # [s]earch [a]ny
-alias pfi='yay -Qo'                              # [f]ile owned by [i]nstalled
-alias pfa='yay -F'                               # [f]ile owned by [a]ny
-alias plf='yay -Ql'                              # [l]ist [f]iles owned
-alias pla='yay -Q'                               # [l]ist [a]ll installed
-alias ple='yay -Qe'                              # [l]ist [e]xplicit installed
-alias poa='yay -Qdt'                             # [o]rphaned [a]ll
-alias poe='yay -Qet'                             # [o]rphaned [e]xplicity
-alias pcd='yay -Scd'                             # [c]lean and [d]elete cache
+alias pst='yay -Ps'                                                  # [st]ats
+alias pnw='yay -Pw'                                                  # [n]e[w]s
+alias pup='yay -Syu --removemake --sudoloop'                         # [up]date
+alias pid='yay -U'                                                   # [i]nstall from [d]atabase
+alias pir='yay -S'                                                   # [i]nstall from [r]emote
+alias pni='yay -Qi'                                                  # i[n]fo of [i]nstalled
+alias pna='yay -Si'                                                  # i[n]fo of [a]ny
+alias psi='yay -Qs'                                                  # [s]each [i]nstalled
+alias psa='yay -Ss'                                                  # [s]earch [a]ny
+alias pfi='yay -Qo'                                                  # [f]ile owned by [i]nstalled
+alias pfa='yay -F'                                                   # [f]ile owned by [a]ny
+alias plf='yay -Ql'                                                  # [l]ist [f]iles owned
+alias pla='yay -Q'                                                   # [l]ist [a]ll installed
+alias ple='yay -Qe'                                                  # [l]ist [e]xplicit installed
+alias poa='yay -Qdt'                                                 # [o]rphaned [a]ll
+alias poe='yay -Qet'                                                 # [o]rphaned [e]xplicity
+alias pcd='yay -Scd'                                                 # [c]lean and [d]elete cache
 alias pil="grep -i installed /var/log/pacman.log | cut -d ' ' -f1,4" # [i]nstalled [l]og
 alias prl="grep -i removed /var/log/pacman.log | cut -d ' ' -f1,4"   # [r]emoved [l]og
 alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [u]pdated [l]og
+
+############
+#  other   #
+############
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings '
+alias zt='time zsh -i -c exit'
+alias ns='netbird status'
+alias ka='killall -q'
+alias w='curl -s https://wttr.in/London?format=3'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias txc='perl ~/.local/share/texcount/texcount.pl'
+alias tb='toolbox'
+alias tbe='toolbox enter'
+alias tbr='toolbox run'
+alias zke='zk edit -i'
+alias tpc='tea pulls c'
+alias tm='tea pulls m $1'

@@ -82,7 +82,7 @@ function avenv() {
 }
 
 ##########################
-#   new feature branch   #
+#   New feature branch   #
 ##########################
 
 function nbr() {

@@ -154,7 +154,6 @@ zsh-defer source "$ZDOTDIR"/lscolors.sh
 # Better vi mode
 source $XDG_DATA_HOME/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ZVM_VI_EDITOR=nvim
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk # Use 'jk' to go from insert -> normal
 
 # User keybindings
 zsh-defer source "$ZDOTDIR"/keybindings.zsh

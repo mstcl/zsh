@@ -3,7 +3,7 @@
 ##########
 
 alias sudo="sudo "
-alias sunv='sudo -E nvim $1'
+alias sunv='sudo -E "$EDITOR" $1'
 alias sue='sudo -E $1'
 
 ###########################
@@ -22,7 +22,6 @@ alias fdisk="sudo grc fdisk -l"
 #####################
 
 alias mkp="mkdir -p" # [mk]dir -[p]
-alias t='touch'      # [t]ouch
 alias mv='mv -iv'
 alias rm='rm -iv'
 alias cp='cp -iv'
@@ -41,30 +40,16 @@ alias q='exit' # [q]uit
 #  Bat/less  #
 ##############
 
-alias b='bat'                     # [b]at
-alias cat='bat'                   # [b]at
-alias less='bat'                  # [bat]
-alias bp='bat -pp --color=always' # [b]at [p]lain
+alias cat='bat'
+alias catp='bat -pp --color=always'
 
-##########
-#  Nvim  #
-##########
+############
+#  EDITOR  #
+############
 
-alias nv='nvim' # [nv]im
-
-###############
-#  Systemctl  #
-###############
-
-alias sc='sudo systemctl'    # [s]ystem[c]tl
-alias scu='systemctl --user' # [s]ystem[c]tl [u]ser
-
-#############
-#  Ansible  #
-#############
-
-alias ap="ansible-playbook"    # [a]nsible [p]laybook
-alias ac="ansible-playbook -C" # [a]nsible [c]heck only
+alias nv='nvim'
+alias vi='nvim'
+alias vim='nvim'
 
 #######################
 #  Directory listing  #
@@ -83,7 +68,7 @@ alias lla='eza -l --color=always --group-directories-first -h --git -a'         
 #################
 
 alias du='erd --no-git --hidden -H -i'
-alias df='duf -theme ansi'
+alias duf='duf -theme ansi'
 
 #########
 #  Git  #
@@ -107,6 +92,7 @@ alias grb='git rebase'                                       # [g]it [r]e[b]ase
 alias gcl='git clone'                                        # [g]it [cl]one
 alias gbr='git branch'                                       # [g]it [br]anch
 alias gco='git checkout'                                     # [g]it [c]heck[o]ut
+alias gcm='git commit'                                       # [g]it [c]o[m]mit
 alias gsl='git shortlog -sn'                                 # [g]it [s]hort[log]
 alias gcp='git cherry-pick'                                  # [g]it [c]herry [p]ick
 alias gsu='git submodule update --recursive --remote --init' # [g]it [s]ubmodule [u]pdate
@@ -166,14 +152,11 @@ alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [u]pdated
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings '
 alias zt='time zsh -i -c exit'
 alias ns='netbird status'
-alias ka='killall -q'
 alias w='curl -s https://wttr.in/London?format=3'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/history"'
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias txc='perl ~/.local/share/texcount/texcount.pl'
-alias tb='toolbox'
-alias tbe='toolbox enter'
-alias tbr='toolbox run'
 alias zke='zk edit -i'
 alias tpc='tea pulls c'
-alias tm='tea pulls m $1'
+alias tpm='tea pulls m $1'
+alias th='~/.local/bin/toggle_dark'

@@ -2,32 +2,27 @@
 #  Make directory & move into it  #
 ###################################
 
-function mkcd {
+function mkcd() {
 	command mkdir $1 && cd $1
 }
 
-############################
-#  Git commit interactive  #
-############################
+#########################
+#  Enter tmp directory  #
+#########################
 
-gcm() {
-	echo -e "Enter commit message:"
-	message=""
-	while [ -z "$message" ]; do
-		IFS= read -r message
-		wait
-		sleep 1
-	done
-	git commit -m "$message"
-	message=""
+function temp() {
+	cd "$(mktemp -d)"
 }
 
+function scr() {
+	"$EDITOR" $(mktemp)
+}
 
 ########################
 #  Aur install/remove  #
 ########################
 
-function ins {
+function ins() {
 	yay -Sl | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' |
 		awk '{ print $2 " " $4 $5 }' |
 		sed 's/installed/i/' |
@@ -58,7 +53,7 @@ function rgf() {
 			--preview-window 'up,60%,+{2}+3/3,~3' \
 			--preview "bat --style=numbers,header --color=always {1} --highlight-line {2} \
     2> /dev/null" \
-			--bind 'enter:become(nvim {1} +{2})'
+			--bind 'enter:become($EDITOR {1} +{2})'
 }
 
 ##########################
@@ -66,7 +61,7 @@ function rgf() {
 ##########################
 
 function fv() {
-	nvim $(__fzf_select)
+	"$EDITOR" $(__fzf_select)
 }
 
 ##########################

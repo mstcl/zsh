@@ -75,6 +75,7 @@ alias duf='duf -theme ansi'
 #########
 
 alias g='git'                                                # [g]it
+alias gs='git sync'                                          # [g]it [s]ync
 alias gsa='git status'                                       # [g]it [s]tatus [a]ll
 alias gss='git status -s'                                    # [g]it [s]tatus [s]taged
 alias gst='git stash'                                        # [g]it [st]ash

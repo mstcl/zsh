@@ -140,11 +140,11 @@ export LESSOPEN
 #  Personal aliases & functions  #
 ##################################
 
+zsh-defer source "$ZDOTDIR"/lscolors.sh
 zsh-defer source "$ZDOTDIR"/functions.zsh
 zsh-defer source "$ZDOTDIR"/aliases.zsh
 zsh-defer source "$ZDOTDIR"/fzf_defaults.sh
 zsh-defer source "$ZDOTDIR"/fzf.zsh
-zsh-defer source "$ZDOTDIR"/lscolors.sh
 
 
 #################

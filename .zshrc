@@ -13,6 +13,7 @@ fi
 source $XDG_DATA_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 source $XDG_CONFIG_HOME/zsh/p10k.zsh
 
+
 ##########################################################
 #  High-priority configs                                 #
 #  NOTE: These get loaded first but might be overridden  #
@@ -126,9 +127,6 @@ setopt HIST_IGNORE_ALL_DUPS
 #  Exported environment variables  #
 ####################################
 
-# Set this to whatever terminal one is using,
-# it seems to affect some GPU-based rendering
-
 # Nice sudo prompt
 export SUDO_PROMPT="Enter sudo password: "
 
@@ -136,9 +134,10 @@ export SUDO_PROMPT="Enter sudo password: "
 LESSOPEN="|/usr/bin/lesspipe.sh %s"
 export LESSOPEN
 
-##################################
-#  Personal aliases & functions  #
-##################################
+
+###################################
+#  Source personal configuration  #
+###################################
 
 zsh-defer source "$ZDOTDIR"/lscolors.sh
 zsh-defer source "$ZDOTDIR"/functions.zsh

@@ -2,19 +2,33 @@
 #  VARIABLES  #
 ###############
 
-export FREETYPE_PROPERTIES="cff:no-stem-darkening=0"
+# Directories
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/share:/usr/local/share"
 export TRASH="$XDG_DATA_HOME/Trash/files"
+export VENV_DIR="$HOME/.venv"
+
+# Package configuration
+export FREETYPE_PROPERTIES="cff:no-stem-darkening=0"
+export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
+export ZK_NOTEBOOK_DIR="$HOME/projects/wiki"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export GOPATH="$XDG_DATA_HOME/go"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+# Display/graphics
 export _GL_SYNC_DISPLAY_DEVICE="DP-2"
 export VDPAU_DRIVER="nvidia"
 export LIBVA_DRIVER_NAME="nvidia"
+
+# Defaults
 export BROWSER="/usr/bin/firefox"
 export MANPAGER="/usr/bin/nvim +Man!"
 export DIFFPROG="/usr/bin/nvim"
 export EDITOR="/usr/bin/nvim"
 export PAGER="less -R"
 export BAT_PAGER="/usr/bin/less -RF"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# Don't trash my home
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
@@ -25,9 +39,7 @@ export CONAN_USER_HOME="$XDG_CONFIG_HOME/conan"
 export ANDROID_HOME="$XDG_DATA_HOME/android"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql/mysql_history"
 export PYTHONSTARTUP="/etc/python/pythonrc"
-export GOPATH="$XDG_DATA_HOME/go"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export NUGET_PACKAGES="$XDG_CACHE_HOME/NuGetPackages"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
@@ -38,16 +50,12 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
 export ANSIBLE_GALAXY_CACHE_DIR="$XDG_CACHE_HOME/ansible/galaxy_cache"
 export ANSIBLE_HOME="$XDG_CONFIG_HOME/ansible"
 export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
 export KERAS_HOME="$XDG_STATE_HOME/keras"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
-export ANSIBLE_VENV="$HOME/.venv/ansible_venv"
-export NODE_PATH="$HOME/.local/share/nvim/mason/packages/commitlint/node_modules"
-export ZK_NOTEBOOK_DIR="$HOME/projects/wiki"
 
 ##########################
 #  PATHS & FINAL CHECKS  #
@@ -70,8 +78,8 @@ append_path "$HOME/.local/share/applications"
 append_path "$HOME/.local/bin"
 append_path "$HOME/bin"
 append_path "$HOME/scripts/bin"
-append_path "$HOME/.local/share/cargo/bin"
-append_path "$HOME/.local/share/go/bin"
+append_path "$CARGO_HOME/bin"
+append_path "$GOPATH/bin"
 append_path "$HOME/.local/share/nvim/mason/bin/"
 
 export PATH

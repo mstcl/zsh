@@ -176,3 +176,6 @@ select-word-style bash
 
 # Load direnv
 eval "$(direnv hook zsh)"
+
+# Source default uv venv
+source $VENV_DIR/default/bin/activate

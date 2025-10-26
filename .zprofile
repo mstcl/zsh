@@ -1,13 +1,9 @@
-###############
-#  VARIABLES  #
-###############
-
-# Directories
+# :: env vars / directories
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/share:/usr/local/share"
 export TRASH="$XDG_DATA_HOME/Trash/files"
 export VENV_DIR="$HOME/.venv"
 
-# Package configuration
+# :: env vars / package configuration
 export FREETYPE_PROPERTIES="cff:no-stem-darkening=0"
 export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
 export ZK_NOTEBOOK_DIR="$HOME/projects/wiki"
@@ -15,12 +11,12 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
-# Display/graphics
+# :: env vars / display/graphics
 export _GL_SYNC_DISPLAY_DEVICE="DP-2"
 export VDPAU_DRIVER="nvidia"
 export LIBVA_DRIVER_NAME="nvidia"
 
-# Defaults
+# :: env vars / defaults
 export BROWSER="/usr/bin/firefox"
 export MANPAGER="/usr/bin/nvim +Man!"
 export DIFFPROG="/usr/bin/nvim"
@@ -28,7 +24,7 @@ export EDITOR="/usr/bin/nvim"
 export PAGER="less -R"
 export BAT_PAGER="/usr/bin/less -RF"
 
-# Don't trash my home
+# :: env vars / don't trash my home
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
@@ -57,10 +53,7 @@ export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
 export KERAS_HOME="$XDG_STATE_HOME/keras"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 
-##########################
-#  PATHS & FINAL CHECKS  #
-##########################
-
+# :: setup PATH
 umask 022
 append_path() {
 	case ":$PATH:" in

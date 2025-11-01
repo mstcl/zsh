@@ -21,7 +21,7 @@ export BROWSER="/usr/bin/firefox"
 export MANPAGER="/usr/bin/nvim +Man!"
 export DIFFPROG="/usr/bin/nvim"
 export EDITOR="/usr/bin/nvim"
-export PAGER="less -R"
+export PAGER="bat"
 export BAT_PAGER="/usr/bin/less -RF"
 
 # :: env vars / don't trash my home

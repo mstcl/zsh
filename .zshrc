@@ -271,6 +271,16 @@ alias pul="grep -i upgraded /var/log/pacman.log | cut -d ' ' -f1,4"  # [p]acman 
 alias gfc='tea pulls c'    # [g]it [f]orge pull [c]reate
 alias gfm='tea pulls m $1' # [g]it [f]orge pull [m]erge
 
+# :: jujutsu
+alias j='jj'
+alias jin='jj git init'                  # [j]j [in]it
+alias jsa='jj st'                        # [j]j [s]t[a]tus
+alias jnw='jj new'                       # [j]j [n]e[w]
+alias jbc='jj bookmark c -r @-'          # [j]j [b]ookmark create
+alias jpu='jj git push --allow-new'      # [j]j [b]ookmark create
+alias jfe='jj git fetch --remote origin' # [j]j [fe]tch
+alias jrb='jj rebase -d master@origin'   # [j]j [r]e[b]ase
+
 # :: other aliases
 alias zt='time zsh -i -c exit'
 alias ts='tailscale status'

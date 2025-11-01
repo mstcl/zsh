@@ -71,14 +71,14 @@ zcompile-many "$PLUGINS_DIR"/zsh-window-title/zsh-window-title.zsh
 
 # :: fzf-tab
 if [[ ! -e "$PLUGINS_DIR"/fzf-tab ]]; then
-	git clone -q --branch main --depth 1 https://github.com/Aloxaf/fzf-tab "$PLUGINS_DIR"/fzf-tab
+	git clone -q --branch master --depth 1 https://github.com/Aloxaf/fzf-tab "$PLUGINS_DIR"/fzf-tab
 else
 	git -C "$PLUGINS_DIR"/fzf-tab pull
 fi
 zcompile-many "$PLUGINS_DIR"/fzf-tab/fzf-tab.zsh
 
 # :: fzf-tab-source
-if [[ ! -e "$PLUGINS_DIR"/fzf-tab ]]; then
+if [[ ! -e "$PLUGINS_DIR"/fzf-tab-source ]]; then
 	git clone -q --branch main --depth 1 https://github.com/Freed-Wu/fzf-tab-source "$PLUGINS_DIR"/fzf-tab-source
 else
 	git -C "$PLUGINS_DIR"/fzf-tab-source pull
